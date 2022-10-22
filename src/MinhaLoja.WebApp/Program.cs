@@ -1,4 +1,7 @@
-namespace MinhaLoja.WebApp
+﻿using Microsoft.EntityFrameworkCore;
+using MinhaLoja.Data;
+
+namespace MinhaLoja
 {
     public class Program
     {
@@ -7,6 +10,13 @@ namespace MinhaLoja.WebApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+            builder.Services.AddDbContext<MinhaLojaDbContext>(options =>
+                options.UseSqlServer(connectionString, b => b.MigrationsAssembly("MinhaLoja.EntityFrameworkCore")));
+
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();

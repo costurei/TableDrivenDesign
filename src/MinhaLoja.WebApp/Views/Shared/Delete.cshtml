@@ -1,0 +1,37 @@
+﻿@model System.ComponentModel.Table
+
+@{
+    var info = Model.GetInfo();
+
+    ViewData["Title"] = $"Excluir {Model.Id} - {info.PluralName}";
+
+    var parent = (string?)ViewData["Parent"];
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Minha Loja</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">@info.PluralName</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Excluir @Model.Id</li>
+    </ol>
+</nav>
+
+<section>
+    <h1>Excluir @info.SingleName?</h1>
+
+    <form asp-action="Delete" class="container">
+        @*<h5>Cliente @Model.Id</h5>*@
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <partial name="Item/_@Model.GetTypeName()" model="Model" />
+
+        <input type="hidden" asp-for="@parent" />
+
+        <input type="hidden" asp-for="Id" />
+
+        <p>
+            <button type="submit" class="btn btn-danger"><i class="bi bi-exclamation-triangle"></i>Confirmar Exclusão</button>
+        </p>
+    </form>
+</section>

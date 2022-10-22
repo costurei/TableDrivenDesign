@@ -1,0 +1,39 @@
+﻿@model System.ComponentModel.Table
+
+@{
+    var info = Model.GetInfo();
+
+    ViewData["Title"] = $"Criar - {info.PluralName}";
+
+    var parent = (string?)ViewData["Parent"];
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Minha Loja</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">@info.PluralName</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Criar</li>
+    </ol>
+</nav>
+
+<section>
+    <h1>Criar Clientes</h1>
+
+    <form asp-action="Create" class="container">
+        @*<h5>Novo</h5>*@
+
+        <partial name="_Form" model="Model" />
+
+        <input type="hidden" asp-for="@parent" />
+
+        <p>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i>Salvar</button>
+        </p>
+    </form>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

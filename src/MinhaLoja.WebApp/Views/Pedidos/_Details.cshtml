@@ -1,0 +1,27 @@
+﻿@model MinhaLoja.Models.Pedido
+
+@{
+    var parent = "Pedido";
+
+    var viewData = new ViewDataDictionary(ViewData) { { "Parent", parent } };
+}
+
+<section>
+    <h2>Pagamentos</h2>
+
+    <div class="container">
+        <p>
+            <a asp-area="Lojas" asp-controller="Pagamentos" asp-action="Create" asp-route-pedidoId="@Model.Id">Criar Novo<i class="bi bi-plus-circle"></i></a>
+        </p>
+
+        @*<partial name="List/_Pagamentos" model="Model.Pagamentos" view-data=@viewData />*@
+
+        <section>
+            <h7>Não há mais detalhes de pagamentos</h7>
+        </section>
+    </div>
+</section>
+
+<section>
+    <h7>Não há mais detalhes de pedido</h7>
+</section>

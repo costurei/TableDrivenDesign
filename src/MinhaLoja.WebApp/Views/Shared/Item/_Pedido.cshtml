@@ -1,0 +1,56 @@
+﻿@model MinhaLoja.Models.Pedido
+
+@{
+    var parent = (string?)ViewData["Parent"];
+}
+
+<dl class="row">
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Id)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Id)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Cliente)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Cliente.Nome)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Data)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Data)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Servico)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Servico.Descricao)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Descricao)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Descricao)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Valor)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Valor)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.PagamentosQuantidade)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.PagamentosQuantidade)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.PagamentosTotal)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.PagamentosTotal)
+    </dd>
+</dl>

@@ -1,0 +1,56 @@
+﻿@model MinhaLoja.Models.Cliente
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+@if (Model.IsEdit())
+{
+    <div class="row">
+        <label asp-for="Id" class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-3">
+            <input asp-for="Id" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+}
+<div class="row">
+    <label asp-for="Nome" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="Nome" class="form-control" />
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="Referencia" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="Referencia" class="form-control" />
+        <span asp-validation-for="Referencia" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="Telefone" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="Telefone" class="form-control" />
+        <span asp-validation-for="Telefone" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="Endereco" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="Endereco" class="form-control" />
+        <span asp-validation-for="Endereco" class="text-danger"></span>
+    </div>
+</div>
+@*<div class="row">
+    <label asp-for="PedidosQuantidade" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="PedidosQuantidade" class="form-control" />
+        <span asp-validation-for="PedidosQuantidade" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="PedidosTotal" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="PedidosTotal" class="form-control" />
+        <span asp-validation-for="PedidosTotal" class="text-danger"></span>
+    </div>
+</div>
+*@
