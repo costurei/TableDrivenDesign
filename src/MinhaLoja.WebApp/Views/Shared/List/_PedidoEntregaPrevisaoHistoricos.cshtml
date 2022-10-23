@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MinhaLoja.Models.PedidoEntregaPrevisaoHistorico>
+
+@{
+    var parent = (string?)ViewData["Parent"];
+}
+
+<div class="row table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                @if (parent != "Pedido")
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pedido.Cliente)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pedido)
+                    </th>
+                }
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        <a asp-area="" asp-controller="PedidoEntregaPrevisaoHistoricos" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-link-45deg"></i></a>
+                        <a asp-area="" asp-controller="PedidoEntregaPrevisaoHistoricos" asp-action="Edit" asp-route-id="@item.Id" asp-route-parent="@parent"><i class="bi bi-pencil"></i></a>
+                        <a asp-area="" asp-controller="PedidoEntregaPrevisaoHistoricos" asp-action="Delete" asp-route-id="@item.Id" asp-route-parent="@parent" class="link-danger"><i class="bi bi-trash"></i></a>
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </th>
+                    @if (parent != "Pedido")
+                    {
+                        <td>
+                            <a asp-area="" asp-controller="Cliente" asp-action="Details" asp-route-id="@item.Pedido.ClienteId">
+                                @Html.DisplayFor(modelItem => item.Pedido.Cliente.Nome)
+                                <i class="bi bi-link-45deg"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Pedido" asp-action="Details" asp-route-id="@item.PedidoId">
+                                @Html.DisplayFor(modelItem => item.Pedido.Descricao)
+                                <i class="bi bi-link-45deg"></i>
+                            </a>
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

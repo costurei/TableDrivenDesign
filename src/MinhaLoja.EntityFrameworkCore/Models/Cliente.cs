@@ -3,18 +3,29 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MinhaLoja.Models
 {
-    [TableInfo(AreaName = "", SingleMetaName = "Cliente", PluralMetaName = "Clientes", Gender = "o", SingleName = "Cliente", PluralName = "Clientes")]
-    public class Cliente : Table
+    [EntityInfo(AreaName = "", SingleMetaName = "Cliente", PluralMetaName = "Clientes", Gender = "o", SingleName = "Cliente", PluralName = "Clientes")]
+    public class Cliente : Entity
     {
         [DisplayName("Nome")]
-        [Required]
-        [StringLength(64, MinimumLength = 2)]
-        public string Nome { get; set; } = default!;
+        public string Nome { get => $"{(NomePrefixo == null ? "" : $"{NomePrefixo} ")}{NomePrimeiro}, {NomeSufixo}"; }
 
-        [DisplayName("Referência")]
+        [DisplayName("Prefixo Nome")]
+        [StringLength(64, MinimumLength = 2)]
+        public string? NomePrefixo { get; set; }
+
+        [DisplayName("Primeiro Nome")]
         [Required]
         [StringLength(64, MinimumLength = 2)]
-        public string Referencia { get; set; } = default!;
+        public string NomePrimeiro { get; set; } = default!;
+
+        [DisplayName("Segundo Nome")]
+        [StringLength(64, MinimumLength = 2)]
+        public string? NomeSegundo { get; set; }
+
+        [DisplayName("Sufixo Nome")]
+        [Required]
+        [StringLength(64, MinimumLength = 2)]
+        public string NomeSufixo { get; set; } = default!;
 
         [DisplayName("Telefone")]
         [StringLength(16, MinimumLength = 8)]
@@ -25,19 +36,13 @@ namespace MinhaLoja.Models
         public string? Endereco { get; set; }
 
         [DisplayName("Pedidos (#)")]
-        public int? PedidosQuantidade { get => Pedidos?.Count; }
+        public int? PedidosTotalQuantidade { get => Pedidos?.Count; }
 
         [DisplayName("Pedidos (R$)")]
-        public decimal? PedidosTotal { get => Pedidos?.Sum(p => p.Valor); }
+        public decimal? PedidosTotalValor { get => Pedidos?.Sum(p => p.Valor); }
 
         [DisplayName("Pedidos")]
         public virtual ICollection<Pedido>? Pedidos { get; set; }
-
-        [DisplayName("Pagamentos (#)")]
-        public int? PagamentosQuantidade { get => Pedidos?.Sum(p => p.Pagamentos?.Count); }
-
-        [DisplayName("Pagamentos (R$)")]
-        public decimal? PagamentosTotal { get => Pedidos?.Sum(p => p.Pagamentos?.Sum(p => p.Valor)); }
 
         public Cliente()
         {

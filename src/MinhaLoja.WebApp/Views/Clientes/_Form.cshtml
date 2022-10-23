@@ -12,17 +12,31 @@
     </div>
 }
 <div class="row">
-    <label asp-for="Nome" class="col-sm-3 col-form-label"></label>
+    <label asp-for="NomePrefixo" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
-        <input asp-for="Nome" class="form-control" />
-        <span asp-validation-for="Nome" class="text-danger"></span>
+        <input asp-for="NomePrefixo" class="form-control" />
+        <span asp-validation-for="NomePrefixo" class="text-danger"></span>
     </div>
 </div>
 <div class="row">
-    <label asp-for="Referencia" class="col-sm-3 col-form-label"></label>
+    <label asp-for="NomePrimeiro" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
-        <input asp-for="Referencia" class="form-control" />
-        <span asp-validation-for="Referencia" class="text-danger"></span>
+        <input asp-for="NomePrimeiro" class="form-control" />
+        <span asp-validation-for="NomePrimeiro" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="NomeSegundo" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="NomeSegundo" class="form-control" />
+        <span asp-validation-for="NomeSegundo" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="NomeSufixo" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="NomeSufixo" class="form-control" />
+        <span asp-validation-for="NomeSufixo" class="text-danger"></span>
     </div>
 </div>
 <div class="row">
@@ -39,18 +53,3 @@
         <span asp-validation-for="Endereco" class="text-danger"></span>
     </div>
 </div>
-@*<div class="row">
-    <label asp-for="PedidosQuantidade" class="col-sm-3 col-form-label"></label>
-    <div class="col-sm-9">
-        <input asp-for="PedidosQuantidade" class="form-control" />
-        <span asp-validation-for="PedidosQuantidade" class="text-danger"></span>
-    </div>
-</div>
-<div class="row">
-    <label asp-for="PedidosTotal" class="col-sm-3 col-form-label"></label>
-    <div class="col-sm-9">
-        <input asp-for="PedidosTotal" class="form-control" />
-        <span asp-validation-for="PedidosTotal" class="text-danger"></span>
-    </div>
-</div>
-*@

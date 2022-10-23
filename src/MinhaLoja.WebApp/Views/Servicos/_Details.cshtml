@@ -1,7 +1,7 @@
-﻿@model MinhaLoja.Models.Cliente
+﻿@model MinhaLoja.Models.Servico
 
 @{
-    var parent = "Cliente";
+    var parent = "Servico";
 
     var viewData = new ViewDataDictionary(ViewData) { { "Parent", parent } };
 }
@@ -11,7 +11,7 @@
 
     <div class="container">
         <p>
-            <a asp-area="" asp-controller="Pedidos" asp-action="Create" asp-route-clienteId="@Model.Id">Criar Novo<i class="bi bi-plus-circle"></i></a>
+            <a asp-area="" asp-controller="Pedidos" asp-action="Create" asp-route-pedidoId="@Model.Id">Criar Novo<i class="bi bi-plus-circle"></i></a>
         </p>
 
         <partial name="List/_Pedidos" model="Model.Pedidos" view-data=@viewData />
@@ -23,5 +23,5 @@
 </section>
 
 <section>
-    <h7>Não há mais detalhes de cliente</h7>
+    <h7>Não há mais detalhes de serviço</h7>
 </section>

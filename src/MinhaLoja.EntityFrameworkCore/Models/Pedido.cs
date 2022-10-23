@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MinhaLoja.Models
 {
-    [TableInfo(AreaName = "", SingleMetaName = "Pedido", PluralMetaName = "Pedidos", Gender = "o", SingleName = "Pedido", PluralName = "Pedidos")]
-    public class Pedido : Table
+    [EntityInfo(AreaName = "", SingleMetaName = "Pedido", PluralMetaName = "Pedidos", Gender = "o", SingleName = "Pedido", PluralName = "Pedidos")]
+    public class Pedido : Entity
     {
         [DisplayName("Cliente Id")]
         public int ClienteId { get; set; }
@@ -27,22 +27,32 @@ namespace MinhaLoja.Models
         [StringLength(256, MinimumLength = 2)]
         public string Descricao { get; set; } = default!;
 
-        [DisplayName("Valor")]
+        [DisplayName("Previsão Entrega")]
+        public DateTime EntregaPrevisaoData { get; set; }
+
+        [DisplayName("Data Entrega")]
+        public DateTime? EntregaData { get; set; }
+
+        [DisplayName("Valor (R$)")]
         [Precision(14, 2)]
         public decimal Valor { get; set; }
 
-        [DisplayName("Pagamentos (#)")]
-        public int? PagamentosQuantidade { get => Pagamentos?.Count; }
+        [DisplayName("Sinal (R$)")]
+        [Precision(14, 2)]
+        public decimal SinalValor { get; set; }
 
-        [DisplayName("Pagamentos (R$)")]
-        public decimal? PagamentosTotal { get => Pagamentos?.Sum(p => p.Valor); }
+        [DisplayName("Pago")]
+        public bool Pago { get; set; }
 
-        [DisplayName("Pagamentos")]
-        public virtual ICollection<Pagamento> Pagamentos { get; set; }
+        [DisplayName("Hist. Prev. Entrega (#)")]
+        public int? EntregaPrevisaoHistoricosTotalQuantidade { get => EntregaPrevisaoHistoricos?.Count; }
+
+        [DisplayName("Históricos Previsão Entrega")]
+        public virtual ICollection<PedidoEntregaPrevisaoHistorico>? EntregaPrevisaoHistoricos { get; set; }
 
         public Pedido()
         {
-            Pagamentos = new HashSet<Pagamento>();
+
         }
     }
 }

@@ -7,17 +7,17 @@
 }
 
 <section>
-    <h2>Pagamentos</h2>
+    <h2>Históricos de Previsão de Entrega</h2>
 
     <div class="container">
         <p>
-            <a asp-area="Lojas" asp-controller="Pagamentos" asp-action="Create" asp-route-pedidoId="@Model.Id">Criar Novo<i class="bi bi-plus-circle"></i></a>
+            <a asp-area="" asp-controller="PedidoEntregaPrevisaoHistoricos" asp-action="Create" asp-route-pedidoId="@Model.Id">Criar Novo<i class="bi bi-plus-circle"></i></a>
         </p>
 
-        @*<partial name="List/_Pagamentos" model="Model.Pagamentos" view-data=@viewData />*@
+        <partial name="List/_PedidoEntregaPrevisaoHistoricos" model="Model.EntregaPrevisaoHistoricos" view-data=@viewData />
 
         <section>
-            <h7>Não há mais detalhes de pagamentos</h7>
+            <h7>Não há mais detalhes de históricos de previsão de entrega</h7>
         </section>
     </div>
 </section>

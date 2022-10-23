@@ -1,174 +1,228 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MinhaLoja.Data;
 using MinhaLoja.Models;
+using MinhaLoja.Services;
 
-namespace MinhaLoja.Controllers
+namespace MinhaLoja.Controllers;
+
+public class PedidosController : Controller
 {
-    public class PedidosController : Controller
+    private readonly MinhaLojaDbContext _db;
+
+    public PedidosController(MinhaLojaDbContext db)
     {
-        private readonly MinhaLojaDbContext _context;
+        _db = db;
+    }
 
-        public PedidosController(MinhaLojaDbContext context)
+    public async Task<IActionResult> Index()
+    {
+        var list = await _db.GetPedidos();
+
+        return View(list);
+    }
+
+    public async Task<IActionResult> Details(int? id)
+    {
+        if (id == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        // GET: Pedidos
-        public async Task<IActionResult> Index()
+        var pedido = await _db.GetPedido(id.Value);
+
+        if (pedido == null)
         {
-            var minhaLojaDbContext = _context.Pedidos.Include(p => p.Cliente).Include(p => p.Servico);
-            return View(await minhaLojaDbContext.ToListAsync());
+            return NotFound();
         }
 
-        // GET: Pedidos/Details/5
-        public async Task<IActionResult> Details(int? id)
+        return View(pedido);
+    }
+
+    public IActionResult Create(int? clienteId, int? servicoId)
+    {
+        var pedido = new Pedido();
+
+        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Nome");
+
+        ViewData["ServicoId"] = new SelectList(_db.Servicos, "Id", "Descricao");
+
+        if (clienteId.HasValue)
         {
-            if (id == null || _context.Pedidos == null)
-            {
-                return NotFound();
-            }
+            pedido.ClienteId = clienteId.Value;
 
-            var pedido = await _context.Pedidos
-                .Include(p => p.Cliente)
-                .Include(p => p.Servico)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (pedido == null)
-            {
-                return NotFound();
-            }
-
-            return View(pedido);
+            ViewData["Parent"] = "Cliente";
         }
 
-        // GET: Pedidos/Create
-        public IActionResult Create()
+        if (servicoId.HasValue)
         {
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Nome");
-            ViewData["ServicoId"] = new SelectList(_context.Servicos, "Id", "Descricao");
-            return View();
+            pedido.ServicoId = servicoId.Value;
+
+            ViewData["Parent"] = "Servico";
         }
 
-        // POST: Pedidos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClienteId,Data,ServicoId,Descricao,Valor,Id,RowVersion")] Pedido pedido)
+        return View(pedido);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create([Bind("ClienteId,Data,ServicoId,Descricao,EntregaPrevisaoData,EntregaData,Valor,SinalValor,Pago")] Pedido pedido, string? parent)
+    {
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(pedido);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Nome", pedido.ClienteId);
-            ViewData["ServicoId"] = new SelectList(_context.Servicos, "Id", "Descricao", pedido.ServicoId);
-            return View(pedido);
-        }
+            _db.Add(pedido);
 
-        // GET: Pedidos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Pedidos == null)
+            await _db.SaveChangesAsync();
+
+            if (parent == "Cliente")
             {
-                return NotFound();
+                return RedirectToAction("Details", "Cliente", new { id = pedido.ClienteId });
             }
 
-            var pedido = await _context.Pedidos.FindAsync(id);
-            if (pedido == null)
+            if (parent == "Servico")
             {
-                return NotFound();
-            }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Nome", pedido.ClienteId);
-            ViewData["ServicoId"] = new SelectList(_context.Servicos, "Id", "Descricao", pedido.ServicoId);
-            return View(pedido);
-        }
-
-        // POST: Pedidos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Data,ServicoId,Descricao,Valor,Id,RowVersion")] Pedido pedido)
-        {
-            if (id != pedido.Id)
-            {
-                return NotFound();
+                return RedirectToAction("Details", "Servico", new { id = pedido.ServicoId });
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(pedido);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PedidoExists(pedido.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Nome", pedido.ClienteId);
-            ViewData["ServicoId"] = new SelectList(_context.Servicos, "Id", "Descricao", pedido.ServicoId);
-            return View(pedido);
-        }
-
-        // GET: Pedidos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Pedidos == null)
-            {
-                return NotFound();
-            }
-
-            var pedido = await _context.Pedidos
-                .Include(p => p.Cliente)
-                .Include(p => p.Servico)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (pedido == null)
-            {
-                return NotFound();
-            }
-
-            return View(pedido);
-        }
-
-        // POST: Pedidos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Pedidos == null)
-            {
-                return Problem("Entity set 'MinhaLojaDbContext.Pedidos'  is null.");
-            }
-            var pedido = await _context.Pedidos.FindAsync(id);
-            if (pedido != null)
-            {
-                _context.Pedidos.Remove(pedido);
-            }
-            
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PedidoExists(int id)
+        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Nome", pedido.ClienteId);
+
+        ViewData["ServicoId"] = new SelectList(_db.Servicos, "Id", "Descricao", pedido.ServicoId);
+
+        ViewData["Parent"] = parent;
+
+        return View(pedido);
+    }
+
+    public async Task<IActionResult> Edit(int? id, string? parent, string? from)
+    {
+        if (id == null)
         {
-          return _context.Pedidos.Any(e => e.Id == id);
+            return NotFound();
         }
+
+        var pedido = await _db.Pedidos.FindAsync(id);
+
+        if (pedido == null)
+        {
+            return NotFound();
+        }
+
+        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Nome", pedido.ClienteId);
+
+        ViewData["ServicoId"] = new SelectList(_db.Servicos, "Id", "Descricao", pedido.ServicoId);
+
+        ViewData["Parent"] = parent;
+
+        ViewData["From"] = from;
+
+        return View(pedido);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,Data,ServicoId,Descricao,EntregaPrevisaoData,EntregaData,Valor,SinalValor,Pago,RowVersion")] Pedido pedido, string? parent, string? from)
+    {
+        if (id != pedido.Id)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                _db.Update(pedido);
+
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_db.ExistsEntity<Pedido>(pedido.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            if (parent == "Cliente")
+            {
+                return RedirectToAction("Details", "Cliente", new { id = pedido.ClienteId });
+            }
+
+            if (parent == "Servico")
+            {
+                return RedirectToAction("Details", "Servico", new { id = pedido.ServicoId });
+            }
+
+            if (from == "Details")
+            {
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Nome", pedido.ClienteId);
+
+        ViewData["ServicoId"] = new SelectList(_db.Servicos, "Id", "Descricao", pedido.ServicoId);
+
+        ViewData["Parent"] = parent;
+
+        ViewData["From"] = from;
+
+        return View(pedido);
+    }
+
+    public async Task<IActionResult> Delete(int? id, string? parent)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var pedido = await _db.GetPedido(id.Value);
+
+        if (pedido == null)
+        {
+            return NotFound();
+        }
+
+        ViewData["Parent"] = parent;
+
+        return View(pedido);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id, string? parent)
+    {
+        var pedido = await _db.Pedidos.FindAsync(id);
+
+        if (pedido == null)
+        {
+            return NotFound();
+        }
+
+        _db.Pedidos.Remove(pedido);
+
+        await _db.SaveChangesAsync();
+
+        if (parent == "Cliente")
+        {
+            return RedirectToAction("Details", "Cliente", new { id = pedido.ClienteId });
+        }
+
+        if (parent == "Servico")
+        {
+            return RedirectToAction("Details", "Servico", new { id = pedido.ServicoId });
+        }
+
+        return RedirectToAction(nameof(Index));
     }
 }

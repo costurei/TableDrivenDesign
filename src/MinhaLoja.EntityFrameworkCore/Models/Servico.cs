@@ -9,15 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MinhaLoja.Models
 {
-    [TableInfo(AreaName = "", SingleMetaName = "Servico", PluralMetaName = "Servicos", Gender = "o", SingleName = "Serviço", PluralName = "Serviços")]
-    public class Servico : Table
+    [EntityInfo(AreaName = "", SingleMetaName = "Servico", PluralMetaName = "Servicos", Gender = "o", SingleName = "Serviço", PluralName = "Serviços")]
+    public class Servico : Entity
     {
-        [DisplayName("Tipo Id")]
-        public int TipoId { get; set; }
-
-        [DisplayName("Tipo")]
-        public virtual ServicoTipo Tipo { get; set; } = default!;
-
         [DisplayName("Descrição")]
         [Required]
         [StringLength(256, MinimumLength = 2)]
@@ -27,8 +21,14 @@ namespace MinhaLoja.Models
         [Precision(14, 2)]
         public decimal Valor { get; set; }
 
+        [DisplayName("Pedidos (#)")]
+        public int? PedidosTotalQuantidade { get => Pedidos?.Count; }
+
+        [DisplayName("Pedidos (R$)")]
+        public decimal? PedidosTotalValor { get => Pedidos?.Sum(p => p.Valor); }
+
         [DisplayName("Pedidos")]
-        public virtual ICollection<Pedido> Pedidos { get; set; }
+        public virtual ICollection<Pedido>? Pedidos { get; set; }
 
         public Servico()
         {

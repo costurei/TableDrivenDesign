@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MinhaLoja.Data;
 using MinhaLoja.Models;
@@ -6,86 +7,86 @@ using MinhaLoja.Services;
 
 namespace MinhaLoja.Controllers;
 
-public class ClientesController : Controller
+public class ServicosController : Controller
 {
     private readonly MinhaLojaDbContext _db;
 
-    public ClientesController(MinhaLojaDbContext db)
+    public ServicosController(MinhaLojaDbContext db)
     {
         _db = db;
     }
 
     public async Task<IActionResult> Index()
     {
-        var list = await _db.GetClientes();
+        var list = await _db.GetServicos();
 
         return View(list);
     }
 
     public async Task<IActionResult> Details(int? id)
     {
-        if (id == null || _db.Clientes == null)
+        if (id == null)
         {
             return NotFound();
         }
 
-        var cliente = await _db.GetCliente(id.Value);
+        var servico = await _db.GetServico(id.Value);
 
-        if (cliente == null)
+        if (servico == null)
         {
             return NotFound();
         }
 
-        return View(cliente);
+        return View(servico);
     }
 
     public IActionResult Create()
     {
-        var cliente = new Cliente();
+        var servico = new Servico();
 
-        return View(cliente);
+        return View(servico);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("PrefixoNome,PrimeiroNome,SegundoNome,SufixoNome,Telefone,Endereco")] Cliente cliente)
+    public async Task<IActionResult> Create([Bind("Descricao,Valor")] Servico servico)
     {
         if (ModelState.IsValid)
         {
-            _db.Add(cliente);
+            _db.Add(servico);
 
             await _db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
 
-        return View(cliente);
+        return View(servico);
     }
 
     public async Task<IActionResult> Edit(int? id, string? from)
     {
-        if (id == null || _db.Clientes == null)
+        if (id == null)
         {
             return NotFound();
         }
 
-        var cliente = await _db.Clientes.FindAsync(id);
+        var servico = await _db.Servicos.FindAsync(id);
 
-        if (cliente == null)
+        if (servico == null)
         {
             return NotFound();
         }
 
         ViewData["From"] = from;
 
-        return View(cliente);
+        return View(servico);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,PrefixoNome,PrimeiroNome,SegundoNome,SufixoNome,Telefone,Endereco,RowVersion")] Cliente cliente, string? from)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Descricao,Valor,RowVersion")] Servico servico, string? parent, string? from)
     {
-        if (id != cliente.Id)
+        if (id != servico.Id)
         {
             return NotFound();
         }
@@ -94,13 +95,13 @@ public class ClientesController : Controller
         {
             try
             {
-                _db.Update(cliente);
+                _db.Update(servico);
 
                 await _db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_db.ExistsEntity<Cliente>(cliente.Id))
+                if (!_db.ExistsEntity<Servico>(servico.Id))
                 {
                     return NotFound();
                 }
@@ -120,7 +121,7 @@ public class ClientesController : Controller
 
         ViewData["From"] = from;
 
-        return View(cliente);
+        return View(servico);
     }
 
     public async Task<IActionResult> Delete(int? id)
@@ -130,28 +131,28 @@ public class ClientesController : Controller
             return NotFound();
         }
 
-        var cliente = await _db.GetCliente(id.Value);
+        var servico = await _db.GetServico(id.Value);
 
-        if (cliente == null)
+        if (servico == null)
         {
             return NotFound();
         }
 
-        return View(cliente);
+        return View(servico);
     }
 
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-        var cliente = await _db.Clientes.FindAsync(id);
+        var servico = await _db.Servicos.FindAsync(id);
 
-        if (cliente == null)
+        if (servico == null)
         {
             return NotFound();
         }
 
-        _db.Clientes.Remove(cliente);
+        _db.Servicos.Remove(servico);
 
         await _db.SaveChangesAsync();
 

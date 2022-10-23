@@ -1,25 +1,25 @@
 ﻿namespace System.ComponentModel;
 
-public static class TableInfoExtensions
+public static class EntityInfoExtensions
 {
-    public static bool IsNew(this Table model)
+    public static bool IsNew(this Entity model)
     {
         return model.Id == 0;
     }
 
-    public static bool IsEdit(this Table model)
+    public static bool IsEdit(this Entity model)
     {
         return model.Id != 0;
     }
 
-    public static string GetTypeName(this Table model)
+    public static string GetTypeName(this Entity model)
     {
         var dataEntityType = model.GetType();
 
         return dataEntityType.Name;
     }
 
-    public static string GetTypeName(this IEnumerable<Table> model)
+    public static string GetTypeName(this IEnumerable<Entity> model)
     {
         var dataEntityType = model.GetType().GetGenericArguments()[0];
 
@@ -31,23 +31,23 @@ public static class TableInfoExtensions
         return dataEntityType.Name;
     }
 
-    public static TableInfoAttribute GetInfo(this Table model)
+    public static EntityInfoAttribute GetInfo(this Entity model)
     {
         var dataEntityType = model.GetType();
 
-        var dataInfoAttributes = dataEntityType.GetCustomAttributes(typeof(TableInfoAttribute), false);
+        var dataInfoAttributes = dataEntityType.GetCustomAttributes(typeof(EntityInfoAttribute), false);
 
         if (dataInfoAttributes.Length == 0)
         {
             throw new Exception();
         }
 
-        var info = (TableInfoAttribute)dataInfoAttributes[0];
+        var info = (EntityInfoAttribute)dataInfoAttributes[0];
 
         return info;
     }
 
-    public static TableInfoAttribute GetInfo(this IEnumerable<Table> model)
+    public static EntityInfoAttribute GetInfo(this IEnumerable<Entity> model)
     {
         var dataEntityType = model.GetType().GetGenericArguments()[0];
 
@@ -56,14 +56,14 @@ public static class TableInfoExtensions
             throw new Exception();
         }
 
-        var dataInfoAttributes = dataEntityType.GetCustomAttributes(typeof(TableInfoAttribute), false);
+        var dataInfoAttributes = dataEntityType.GetCustomAttributes(typeof(EntityInfoAttribute), false);
 
         if (dataInfoAttributes.Length == 0)
         {
             throw new Exception();
         }
 
-        var info = (TableInfoAttribute)dataInfoAttributes[0];
+        var info = (EntityInfoAttribute)dataInfoAttributes[0];
 
         return info;
     }

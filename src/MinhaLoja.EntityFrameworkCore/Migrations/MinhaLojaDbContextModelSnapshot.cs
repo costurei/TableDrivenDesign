@@ -8,7 +8,7 @@ using MinhaLoja.Data;
 
 #nullable disable
 
-namespace MinhaLoja.Data.Migrations
+namespace MinhaLoja.Migrations
 {
     [DbContext(typeof(MinhaLojaDbContext))]
     partial class MinhaLojaDbContextModelSnapshot : ModelSnapshot
@@ -34,12 +34,20 @@ namespace MinhaLoja.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("NomePrefixo")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("NomePrimeiro")
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.Property<string>("Referencia")
+                    b.Property<string>("NomeSegundo")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("NomeSufixo")
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
@@ -62,58 +70,27 @@ namespace MinhaLoja.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Nome = "Cliente A",
-                            Referencia = "Ref 1"
+                            NomePrimeiro = "Cliente A",
+                            NomeSufixo = "Ref 1"
                         },
                         new
                         {
                             Id = 2,
-                            Nome = "Cliente B",
-                            Referencia = "Ref 1"
+                            NomePrimeiro = "Cliente B",
+                            NomeSufixo = "Ref 1"
                         },
                         new
                         {
                             Id = 3,
-                            Nome = "Cliente B",
-                            Referencia = "Ref 2"
+                            NomePrimeiro = "Cliente B",
+                            NomeSufixo = "Ref 2"
                         },
                         new
                         {
                             Id = 4,
-                            Nome = "Cliente C",
-                            Referencia = "Ref 1"
+                            NomePrimeiro = "Cliente C",
+                            NomeSufixo = "Ref 1"
                         });
-                });
-
-            modelBuilder.Entity("MinhaLoja.Models.Pagamento", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PedidoId")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<decimal>("Valor")
-                        .HasPrecision(14, 2)
-                        .HasColumnType("decimal(14,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PedidoId");
-
-                    b.ToTable("Pagamentos");
                 });
 
             modelBuilder.Entity("MinhaLoja.Models.Pedido", b =>
@@ -135,6 +112,15 @@ namespace MinhaLoja.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<DateTime?>("EntregaData")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EntregaPrevisaoData")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Pago")
+                        .HasColumnType("bit");
+
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
                         .IsRequired()
@@ -143,6 +129,10 @@ namespace MinhaLoja.Data.Migrations
 
                     b.Property<int>("ServicoId")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("SinalValor")
+                        .HasPrecision(14, 2)
+                        .HasColumnType("decimal(14,2)");
 
                     b.Property<decimal>("Valor")
                         .HasPrecision(14, 2)
@@ -161,37 +151,99 @@ namespace MinhaLoja.Data.Migrations
                         {
                             Id = 1,
                             ClienteId = 1,
-                            Data = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Data = new DateTime(2021, 2, 28, 19, 53, 0, 0, DateTimeKind.Unspecified),
                             Descricao = "Pedido 01",
+                            EntregaData = new DateTime(2021, 3, 3, 17, 15, 0, 0, DateTimeKind.Unspecified),
+                            EntregaPrevisaoData = new DateTime(2021, 3, 4, 19, 53, 0, 0, DateTimeKind.Unspecified),
+                            Pago = true,
                             ServicoId = 1,
+                            SinalValor = 0m,
                             Valor = 15.00m
                         },
                         new
                         {
                             Id = 2,
                             ClienteId = 2,
-                            Data = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Data = new DateTime(2021, 8, 30, 20, 30, 0, 0, DateTimeKind.Unspecified),
                             Descricao = "Pedido 01",
+                            EntregaData = new DateTime(2021, 9, 1, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            EntregaPrevisaoData = new DateTime(2021, 9, 1, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            Pago = true,
                             ServicoId = 1,
+                            SinalValor = 0m,
                             Valor = 0.00m
                         },
                         new
                         {
                             Id = 3,
                             ClienteId = 3,
-                            Data = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Data = new DateTime(2021, 11, 13, 9, 10, 0, 0, DateTimeKind.Unspecified),
                             Descricao = "Pedido 01",
+                            EntregaData = new DateTime(2021, 11, 12, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            EntregaPrevisaoData = new DateTime(2021, 11, 13, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            Pago = false,
                             ServicoId = 1,
+                            SinalValor = 0m,
                             Valor = 7.00m
                         },
                         new
                         {
                             Id = 4,
                             ClienteId = 3,
-                            Data = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Data = new DateTime(2021, 11, 13, 9, 10, 0, 0, DateTimeKind.Unspecified),
                             Descricao = "Pedido 02",
+                            EntregaPrevisaoData = new DateTime(2021, 11, 17, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            Pago = false,
                             ServicoId = 2,
+                            SinalValor = 0m,
                             Valor = 10.00m
+                        });
+                });
+
+            modelBuilder.Entity("MinhaLoja.Models.PedidoEntregaPrevisaoHistorico", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PedidoId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PedidoId");
+
+                    b.ToTable("PedidoEntregaPrevisaoHistoricos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Data = new DateTime(2021, 3, 2, 19, 53, 0, 0, DateTimeKind.Unspecified),
+                            PedidoId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Data = new DateTime(2021, 11, 13, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            PedidoId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Data = new DateTime(2021, 11, 15, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            PedidoId = 4
                         });
                 });
 
@@ -214,16 +266,11 @@ namespace MinhaLoja.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int>("TipoId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Valor")
                         .HasPrecision(14, 2)
                         .HasColumnType("decimal(14,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TipoId");
 
                     b.ToTable("Servicos");
 
@@ -232,63 +279,14 @@ namespace MinhaLoja.Data.Migrations
                         {
                             Id = 1,
                             Descricao = "Serviço 01",
-                            TipoId = 1,
                             Valor = 15.00m
                         },
                         new
                         {
                             Id = 2,
                             Descricao = "Serviço 02",
-                            TipoId = 1,
                             Valor = 10.00m
                         });
-                });
-
-            modelBuilder.Entity("MinhaLoja.Models.ServicoTipo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<decimal>("ValorPadrao")
-                        .HasPrecision(14, 2)
-                        .HasColumnType("decimal(14,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ServicoTipos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nome = "Tipo de Serviço 01",
-                            ValorPadrao = 1.00m
-                        });
-                });
-
-            modelBuilder.Entity("MinhaLoja.Models.Pagamento", b =>
-                {
-                    b.HasOne("MinhaLoja.Models.Pedido", "Pedido")
-                        .WithMany("Pagamentos")
-                        .HasForeignKey("PedidoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pedido");
                 });
 
             modelBuilder.Entity("MinhaLoja.Models.Pedido", b =>
@@ -310,15 +308,15 @@ namespace MinhaLoja.Data.Migrations
                     b.Navigation("Servico");
                 });
 
-            modelBuilder.Entity("MinhaLoja.Models.Servico", b =>
+            modelBuilder.Entity("MinhaLoja.Models.PedidoEntregaPrevisaoHistorico", b =>
                 {
-                    b.HasOne("MinhaLoja.Models.ServicoTipo", "Tipo")
-                        .WithMany("Servicos")
-                        .HasForeignKey("TipoId")
+                    b.HasOne("MinhaLoja.Models.Pedido", "Pedido")
+                        .WithMany("EntregaPrevisaoHistoricos")
+                        .HasForeignKey("PedidoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Tipo");
+                    b.Navigation("Pedido");
                 });
 
             modelBuilder.Entity("MinhaLoja.Models.Cliente", b =>
@@ -328,17 +326,12 @@ namespace MinhaLoja.Data.Migrations
 
             modelBuilder.Entity("MinhaLoja.Models.Pedido", b =>
                 {
-                    b.Navigation("Pagamentos");
+                    b.Navigation("EntregaPrevisaoHistoricos");
                 });
 
             modelBuilder.Entity("MinhaLoja.Models.Servico", b =>
                 {
                     b.Navigation("Pedidos");
-                });
-
-            modelBuilder.Entity("MinhaLoja.Models.ServicoTipo", b =>
-                {
-                    b.Navigation("Servicos");
                 });
 #pragma warning restore 612, 618
         }

@@ -13,10 +13,16 @@
                     @Html.DisplayNameFor(model => model.Id)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Nome)
+                    @Html.DisplayNameFor(model => model.NomePrefixo)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Referencia)
+                    @Html.DisplayNameFor(model => model.NomePrimeiro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeSegundo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeSufixo)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Telefone)
@@ -25,16 +31,10 @@
                     @Html.DisplayNameFor(model => model.Endereco)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PedidosQuantidade)
+                    @Html.DisplayNameFor(model => model.PedidosTotalQuantidade)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PedidosTotal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PagamentosQuantidade)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PagamentosTotal)
+                    @Html.DisplayNameFor(model => model.PedidosTotalValor)
                 </th>
             </tr>
         </thead>
@@ -51,10 +51,16 @@
                         @Html.DisplayFor(modelItem => item.Id)
                     </th>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
+                        @Html.DisplayFor(modelItem => item.NomePrefixo)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Referencia)
+                        @Html.DisplayFor(modelItem => item.NomePrimeiro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeSegundo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeSufixo)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Telefone)
@@ -63,16 +69,10 @@
                         @Html.DisplayFor(modelItem => item.Endereco)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PedidosQuantidade)
+                        @Html.DisplayFor(modelItem => item.PedidosTotalQuantidade)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PedidosTotal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PagamentosQuantidade)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PagamentosTotal)
+                        @Html.DisplayFor(modelItem => item.PedidosTotalValor)
                     </td>
                 </tr>
             }

@@ -15,7 +15,10 @@
         @Html.DisplayNameFor(model => model.Cliente)
     </dt>
     <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.Cliente.Nome)
+        <a asp-area="" asp-controller="Cliente" asp-action="Details" asp-route-id="@Model.ClienteId">
+            @Html.DisplayFor(model => model.Cliente.NomePrimeiro)
+            <i class="bi bi-link-45deg"></i>
+        </a>
     </dd>
     <dt class="col-sm-3">
         @Html.DisplayNameFor(model => model.Data)
@@ -27,7 +30,10 @@
         @Html.DisplayNameFor(model => model.Servico)
     </dt>
     <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.Servico.Descricao)
+        <a asp-area="" asp-controller="Servico" asp-action="Details" asp-route-id="@Model.ServicoId">
+            @Html.DisplayFor(model => model.Servico.Descricao)
+            <i class="bi bi-link-45deg"></i>
+        </a>
     </dd>
     <dt class="col-sm-3">
         @Html.DisplayNameFor(model => model.Descricao)
@@ -36,21 +42,33 @@
         @Html.DisplayFor(model => model.Descricao)
     </dd>
     <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.EntregaPrevisaoData)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.EntregaPrevisaoData)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.EntregaData)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.EntregaData)
+    </dd>
+    <dt class="col-sm-3">
         @Html.DisplayNameFor(model => model.Valor)
     </dt>
     <dd class="col-sm-9">
         @Html.DisplayFor(model => model.Valor)
     </dd>
     <dt class="col-sm-3">
-        @Html.DisplayNameFor(model => model.PagamentosQuantidade)
+        @Html.DisplayNameFor(model => model.SinalValor)
     </dt>
     <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.PagamentosQuantidade)
+        @Html.DisplayFor(model => model.SinalValor)
     </dd>
     <dt class="col-sm-3">
-        @Html.DisplayNameFor(model => model.PagamentosTotal)
+        @Html.DisplayNameFor(model => model.Pago)
     </dt>
     <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.PagamentosTotal)
+        @Html.DisplayFor(model => model.Pago)
     </dd>
 </dl>

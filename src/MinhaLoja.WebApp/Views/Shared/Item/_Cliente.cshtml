@@ -12,16 +12,28 @@
         @Html.DisplayFor(model => model.Id)
     </dd>
     <dt class="col-sm-3">
-        @Html.DisplayNameFor(model => model.Nome)
+        @Html.DisplayNameFor(model => model.NomePrefixo)
     </dt>
     <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.Nome)
+        @Html.DisplayFor(model => model.NomePrefixo)
     </dd>
     <dt class="col-sm-3">
-        @Html.DisplayNameFor(model => model.Referencia)
+        @Html.DisplayNameFor(model => model.NomePrimeiro)
     </dt>
     <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.Referencia)
+        @Html.DisplayFor(model => model.NomePrimeiro)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.NomeSegundo)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.NomeSegundo)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.NomeSufixo)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.NomeSufixo)
     </dd>
     <dt class="col-sm-3">
         @Html.DisplayNameFor(model => model.Telefone)
@@ -36,33 +48,15 @@
         @Html.DisplayFor(model => model.Endereco)
     </dd>
     <dt class="col-sm-3">
-        @Html.DisplayNameFor(model => model.PedidosQuantidade)
+        @Html.DisplayNameFor(model => model.PedidosTotalQuantidade)
     </dt>
     <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.PedidosQuantidade)
+        @Html.DisplayFor(model => model.PedidosTotalQuantidade)
     </dd>
     <dt class="col-sm-3">
-        @Html.DisplayNameFor(model => model.PedidosTotal)
+        @Html.DisplayNameFor(model => model.PedidosTotalValor)
     </dt>
     <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.PedidosTotal)
-    </dd>
-    <dt class="col-sm-3">
-        @Html.DisplayNameFor(model => model.PagamentosQuantidade)
-    </dt>
-    <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.PagamentosQuantidade)
-    </dd>
-    <dt class="col-sm-3">
-        @Html.DisplayNameFor(model => model.PagamentosTotal)
-    </dt>
-    <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.PagamentosTotal)
+        @Html.DisplayFor(model => model.PedidosTotalValor)
     </dd>
 </dl>
-
-@*<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ClienteId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
-*@

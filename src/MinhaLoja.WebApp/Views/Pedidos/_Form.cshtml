@@ -40,9 +40,37 @@
     </div>
 </div>
 <div class="row">
+    <label asp-for="EntregaPrevisaoData" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="EntregaPrevisaoData" class="form-control" />
+        <span asp-validation-for="EntregaPrevisaoData" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="EntregaData" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="EntregaData" class="form-control" />
+        <span asp-validation-for="EntregaData" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
     <label asp-for="Valor" class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
         <input asp-for="Valor" class="form-control" />
         <span asp-validation-for="Valor" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="SinalValor" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="SinalValor" class="form-control" />
+        <span asp-validation-for="SinalValor" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="Pago" class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <input asp-for="Pago" class="form-check-input" />
+        <span asp-validation-for="Pago" class="text-danger"></span>
     </div>
 </div>

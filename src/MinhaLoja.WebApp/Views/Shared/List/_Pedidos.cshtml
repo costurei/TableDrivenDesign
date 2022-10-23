@@ -12,14 +12,26 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Id)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Cliente)
-                </th>
+                @if (parent != "Cliente")
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cliente)
+                    </th>
+                }
                 <th>
                     @Html.DisplayNameFor(model => model.Data)
                 </th>
+                @if (parent != "Servico")
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Servico)
+                    </th>
+                }
                 <th>
-                    @Html.DisplayNameFor(model => model.Servico)
+                    @Html.DisplayNameFor(model => model.EntregaPrevisaoData)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EntregaData)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Descricao)
@@ -28,10 +40,10 @@
                     @Html.DisplayNameFor(model => model.Valor)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PagamentosQuantidade)
+                    @Html.DisplayNameFor(model => model.SinalValor)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PagamentosTotal)
+                    @Html.DisplayNameFor(model => model.Pago)
                 </th>
             </tr>
         </thead>
@@ -47,14 +59,32 @@
                     <th>
                         @Html.DisplayFor(modelItem => item.Id)
                     </th>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Cliente.Nome)
-                    </td>
+                    @if (parent != "Cliente")
+                    {
+                        <td>
+                            <a asp-area="Cadastro" asp-controller="Cliente" asp-action="Details" asp-route-id="@item.ClienteId">
+                                @Html.DisplayFor(modelItem => item.Cliente.Nome)
+                                <i class="bi bi-link-45deg"></i>
+                            </a>
+                        </td>
+                    }
                     <td>
                         @Html.DisplayFor(modelItem => item.Data)
                     </td>
+                    @if (parent != "Servico")
+                    {
+                        <td>
+                            <a asp-area="Cadastro" asp-controller="Servico" asp-action="Details" asp-route-id="@item.ServicoId">
+                                @Html.DisplayFor(modelItem => item.Servico.Descricao)
+                                <i class="bi bi-link-45deg"></i>
+                            </a>
+                        </td>
+                    }
                     <td>
-                        @Html.DisplayFor(modelItem => item.Servico.Descricao)
+                        @Html.DisplayFor(modelItem => item.EntregaPrevisaoData)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EntregaData)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Descricao)
@@ -63,10 +93,10 @@
                         @Html.DisplayFor(modelItem => item.Valor)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PagamentosQuantidade)
+                        @Html.DisplayFor(modelItem => item.SinalValor)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PagamentosTotal)
+                        @Html.DisplayFor(modelItem => item.Pago)
                     </td>
                 </tr>
             }
