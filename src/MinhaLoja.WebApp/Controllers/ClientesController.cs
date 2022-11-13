@@ -29,7 +29,7 @@ public class ClientesController : Controller
             return NotFound();
         }
 
-        var cliente = await _db.GetCliente(id.Value);
+        var cliente = await _db.GetClienteById(id.Value);
 
         if (cliente == null)
         {
@@ -130,7 +130,7 @@ public class ClientesController : Controller
             return NotFound();
         }
 
-        var cliente = await _db.GetCliente(id.Value);
+        var cliente = await _db.GetClienteById(id.Value);
 
         if (cliente == null)
         {

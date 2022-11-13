@@ -30,7 +30,7 @@ public class ServicosController : Controller
             return NotFound();
         }
 
-        var servico = await _db.GetServico(id.Value);
+        var servico = await _db.GetServicoById(id.Value);
 
         if (servico == null)
         {
@@ -131,7 +131,7 @@ public class ServicosController : Controller
             return NotFound();
         }
 
-        var servico = await _db.GetServico(id.Value);
+        var servico = await _db.GetServicoById(id.Value);
 
         if (servico == null)
         {

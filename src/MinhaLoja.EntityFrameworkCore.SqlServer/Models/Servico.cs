@@ -28,7 +28,7 @@ namespace MinhaLoja.Models
         public decimal? PedidosTotalValor { get => Pedidos?.Sum(p => p.Valor); }
 
         [DisplayName("Pedidos")]
-        public virtual ICollection<Pedido>? Pedidos { get; set; }
+        public virtual ICollection<Pedido> Pedidos { get; set; }
 
         public Servico()
         {

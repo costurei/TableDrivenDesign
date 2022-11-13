@@ -30,7 +30,7 @@ public class PedidosController : Controller
             return NotFound();
         }
 
-        var pedido = await _db.GetPedido(id.Value);
+        var pedido = await _db.GetPedidoById(id.Value);
 
         if (pedido == null)
         {
@@ -186,7 +186,7 @@ public class PedidosController : Controller
             return NotFound();
         }
 
-        var pedido = await _db.GetPedido(id.Value);
+        var pedido = await _db.GetPedidoById(id.Value);
 
         if (pedido == null)
         {

@@ -30,7 +30,7 @@ public class PedidoEntregaPrevisaoHistoricosController : Controller
             return NotFound();
         }
 
-        var pagamento = await _db.GetPedidoEntregaPrevisaoHistorico(id.Value);
+        var pagamento = await _db.GetPedidoEntregaPrevisaoHistoricoById(id.Value);
 
         if (pagamento == null)
         {
@@ -222,7 +222,7 @@ public class PedidoEntregaPrevisaoHistoricosController : Controller
             return NotFound();
         }
 
-        var pagamento = await _db.GetPedidoEntregaPrevisaoHistorico(id.Value);
+        var pagamento = await _db.GetPedidoEntregaPrevisaoHistoricoById(id.Value);
 
         if (pagamento == null)
         {

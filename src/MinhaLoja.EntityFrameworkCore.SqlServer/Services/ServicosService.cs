@@ -9,17 +9,19 @@ namespace MinhaLoja.Services
         public static async Task<List<Servico>> GetServicos(this MinhaLojaDbContext db)
         {
             var list = await db.Servicos
+                .Include(p => p.Pedidos)
+                    .ThenInclude(p => p.Cliente)
                 .ToListAsync();
 
             return list;
         }
 
-        public static async Task<Servico> GetServico(this MinhaLojaDbContext db, int id)
+        public static async Task<Servico> GetServicoById(this MinhaLojaDbContext db, int id)
         {
             var item = await db.Servicos
+                .Include(p => p.Pedidos)
+                    .ThenInclude(p => p.Cliente)
                 .SingleOrDefaultAsync(p => p.Id == id);
-
-            item.Pedidos = await db.GetPedidosByServicoId(id);
 
             return item;
         }

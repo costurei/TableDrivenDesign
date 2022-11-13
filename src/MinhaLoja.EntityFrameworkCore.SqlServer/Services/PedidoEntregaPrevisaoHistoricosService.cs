@@ -10,28 +10,21 @@ namespace MinhaLoja.Services
         {
             var list = await db.PedidoEntregaPrevisaoHistoricos
                 .Include(p => p.Pedido)
-                    .ThenInclude(p=>p.Cliente)
-                .ToListAsync();
-
-            return list;
-        }
-
-        public static async Task<List<PedidoEntregaPrevisaoHistorico>> GetPedidoEntregaPrevisaoHistoricosByPedidoId(this MinhaLojaDbContext db, int pedidoId)
-        {
-            var list = await db.PedidoEntregaPrevisaoHistoricos
-                .Include(p => p.Pedido)
                     .ThenInclude(p => p.Cliente)
-                .Where(p => p.PedidoId == pedidoId)
+                .Include(p => p.Pedido)
+                    .ThenInclude(p => p.Servico)
                 .ToListAsync();
 
             return list;
         }
 
-        public static async Task<PedidoEntregaPrevisaoHistorico> GetPedidoEntregaPrevisaoHistorico(this MinhaLojaDbContext db, int id)
+        public static async Task<PedidoEntregaPrevisaoHistorico> GetPedidoEntregaPrevisaoHistoricoById(this MinhaLojaDbContext db, int id)
         {
             var item = await db.PedidoEntregaPrevisaoHistoricos
                 .Include(p => p.Pedido)
                     .ThenInclude(p => p.Cliente)
+                .Include(p => p.Pedido)
+                    .ThenInclude(p => p.Servico)
                 .SingleOrDefaultAsync(p => p.Id == id);
 
             return item;
