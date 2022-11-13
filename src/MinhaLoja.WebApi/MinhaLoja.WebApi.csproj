@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MinhaLoja.EntityFrameworkCore\MinhaLoja.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\MinhaLoja.EntityFrameworkCore.SqlServer\MinhaLoja.EntityFrameworkCore.SqlServer.csproj" />
     <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />
   </ItemGroup>
 

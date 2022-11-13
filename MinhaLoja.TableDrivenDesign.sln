@@ -15,11 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Externals Dependencies"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Documentation", "5 - Documentation", "{79F54563-A88F-40BC-B869-CF3B5DC9260B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinhaLoja.EntityFrameworkCore", "src\MinhaLoja.EntityFrameworkCore\MinhaLoja.EntityFrameworkCore.csproj", "{C4D40CFC-C0F7-4714-BD53-D2963E15586E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinhaLoja.EntityFrameworkCore.SqlServer", "src\MinhaLoja.EntityFrameworkCore.SqlServer\MinhaLoja.EntityFrameworkCore.SqlServer.csproj", "{C4D40CFC-C0F7-4714-BD53-D2963E15586E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Extensions", "src\System.Extensions\System.Extensions.csproj", "{42AE3794-C79B-45F8-B51D-72CA9402EFF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaLoja.WebApi", "src\MinhaLoja.WebApi\MinhaLoja.WebApi.csproj", "{3A90A1DE-8CBE-46BB-908C-F524C3382D90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinhaLoja.WebApi", "src\MinhaLoja.WebApi\MinhaLoja.WebApi.csproj", "{3A90A1DE-8CBE-46BB-908C-F524C3382D90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
