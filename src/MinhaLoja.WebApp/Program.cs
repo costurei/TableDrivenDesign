@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.EntityFrameworkCore;
 using MinhaLoja.Data;
 
 namespace MinhaLoja
@@ -19,6 +20,16 @@ namespace MinhaLoja
 
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+            .AddNegotiate();
+
+            builder.Services.AddAuthorization(options =>
+            {
+                // By default, all incoming requests will be authorized according to the default policy.
+                options.FallbackPolicy = options.DefaultPolicy;
+            });
+            builder.Services.AddRazorPages();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -34,6 +45,7 @@ namespace MinhaLoja
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
