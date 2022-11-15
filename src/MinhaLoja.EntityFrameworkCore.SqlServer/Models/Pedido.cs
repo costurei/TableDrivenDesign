@@ -11,7 +11,7 @@ namespace MinhaLoja.Models
         public int ClienteId { get; set; }
 
         [DisplayName("Cliente")]
-        public virtual Cliente Cliente { get; set; } = default!;
+        public virtual Cliente? Cliente { get; set; }
 
         [DisplayName("Data")]
         public DateTime Data { get; set; }
@@ -20,7 +20,7 @@ namespace MinhaLoja.Models
         public int ServicoId { get; set; }
 
         [DisplayName("Serviço")]
-        public virtual Servico Servico { get; set; } = default!;
+        public virtual Servico? Servico { get; set; }
 
         [DisplayName("Descrição")]
         [Required]
@@ -52,7 +52,7 @@ namespace MinhaLoja.Models
 
         public Pedido()
         {
-
+            EntregaPrevisaoHistoricos = new HashSet<PedidoEntregaPrevisaoHistorico>();
         }
     }
 }

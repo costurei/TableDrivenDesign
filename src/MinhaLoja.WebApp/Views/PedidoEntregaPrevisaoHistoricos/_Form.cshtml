@@ -4,33 +4,34 @@
 
 @if (Model.IsEdit())
 {
+    @Html.HiddenFor(m => m.RowVersion)
+
     <div class="row">
-        <label asp-for="Id" class="col-sm-3 col-form-label"></label>
-        <div class="col-sm-3">
+        <label asp-for="Id" class="col-sm-4 col-md-3 col-form-label"></label>
+        <div class="col-sm-8 col-md-9">
             <input asp-for="Id" class="form-control" disabled="disabled" />
         </div>
     </div>
 }
 <div class="row">
-    <label asp-for="Pedido.ClienteId" class="col-sm-3 col-form-label"></label>
-    <div class="col-sm-3">
+    <label asp-for="Pedido.ClienteId" class="col-sm-4 col-md-3 col-form-label"></label>
+    <div class="col-sm-8 col-md-9">
         <div class="input-group">
             <select class="form-select" aria-label="Selecione" name="ClienteId" asp-items="ViewBag.ClienteId"></select>
             <button class="btn btn-outline-secondary" name="command" value="SelectCliente"><i class="bi bi-check2"></i></button>
         </div>
-        <span asp-validation-for="Pedido.ClienteId" class="text-danger"></span>
     </div>
 </div>
 <div class="row">
-    <label asp-for="PedidoId" class="col-sm-3 col-form-label"></label>
-    <div class="col-sm-9">
+    <label asp-for="PedidoId" class="col-sm-4 col-md-3 col-form-label"></label>
+    <div class="col-sm-8 col-md-9">
         <select asp-for="PedidoId" class="form-control" asp-items="ViewBag.PedidoId"></select>
         <span asp-validation-for="PedidoId" class="text-danger"></span>
     </div>
 </div>
 <div class="row">
-    <label asp-for="Data" class="col-sm-3 col-form-label"></label>
-    <div class="col-sm-9">
+    <label asp-for="Data" class="col-sm-4 col-md-3 col-form-label"></label>
+    <div class="col-sm-8 col-md-9">
         <input asp-for="Data" class="form-control" />
         <span asp-validation-for="Data" class="text-danger"></span>
     </div>

@@ -11,7 +11,7 @@ namespace MinhaLoja.Models
         public int PedidoId { get; set; }
 
         [DisplayName("Pedido")]
-        public virtual Pedido Pedido { get; set; } = default!;
+        public virtual Pedido? Pedido { get; set; }
 
         [DisplayName("Data")]
         public DateTime Data { get; set; }

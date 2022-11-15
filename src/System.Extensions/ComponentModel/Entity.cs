@@ -7,5 +7,10 @@ public abstract class Entity
     public int Id { get; set; }
 
     [Timestamp]
-    public byte[] RowVersion { get; set; } = default!;
+    public byte[] RowVersion { get; set; }
+
+    public Entity()
+    {
+        RowVersion = new byte[0];
+    }
 }

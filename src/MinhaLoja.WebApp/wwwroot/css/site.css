@@ -41,7 +41,7 @@ th:first-child {
     white-space: nowrap;
 }
 
-td {
+dt, th, td {
     white-space: nowrap;
 }
 
@@ -101,4 +101,8 @@ h7 {
 
 footer {
     padding-top: 16px;
+}
+
+.validation-summary-valid {
+    display: none;
 }

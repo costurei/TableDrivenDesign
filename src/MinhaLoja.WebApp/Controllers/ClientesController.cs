@@ -48,7 +48,7 @@ public class ClientesController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("PrefixoNome,PrimeiroNome,SegundoNome,SufixoNome,Telefone,Endereco")] Cliente cliente)
+    public async Task<IActionResult> Create([Bind("NomePrefixo,NomePrimeiro,NomeSegundo,NomeSufixo,Telefone,Endereco")] Cliente cliente)
     {
         if (ModelState.IsValid)
         {
@@ -83,7 +83,7 @@ public class ClientesController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,PrefixoNome,PrimeiroNome,SegundoNome,SufixoNome,Telefone,Endereco,RowVersion")] Cliente cliente, string? from)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,NomePrefixo,NomePrimeiro,NomeSegundo,NomeSufixo,Telefone,Endereco,RowVersion")] Cliente cliente, string? from)
     {
         if (id != cliente.Id)
         {

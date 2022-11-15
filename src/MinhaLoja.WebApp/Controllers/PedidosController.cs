@@ -77,12 +77,12 @@ public class PedidosController : Controller
 
             if (parent == "Cliente")
             {
-                return RedirectToAction("Details", "Cliente", new { id = pedido.ClienteId });
+                return RedirectToAction("Details", "Clientes", new { id = pedido.ClienteId });
             }
 
             if (parent == "Servico")
             {
-                return RedirectToAction("Details", "Servico", new { id = pedido.ServicoId });
+                return RedirectToAction("Details", "Servicos", new { id = pedido.ServicoId });
             }
 
             return RedirectToAction(nameof(Index));
@@ -153,12 +153,12 @@ public class PedidosController : Controller
 
             if (parent == "Cliente")
             {
-                return RedirectToAction("Details", "Cliente", new { id = pedido.ClienteId });
+                return RedirectToAction("Details", "Clientes", new { id = pedido.ClienteId });
             }
 
             if (parent == "Servico")
             {
-                return RedirectToAction("Details", "Servico", new { id = pedido.ServicoId });
+                return RedirectToAction("Details", "Servicos", new { id = pedido.ServicoId });
             }
 
             if (from == "Details")
@@ -215,12 +215,12 @@ public class PedidosController : Controller
 
         if (parent == "Cliente")
         {
-            return RedirectToAction("Details", "Cliente", new { id = pedido.ClienteId });
+            return RedirectToAction("Details", "Clientes", new { id = pedido.ClienteId });
         }
 
         if (parent == "Servico")
         {
-            return RedirectToAction("Details", "Servico", new { id = pedido.ServicoId });
+            return RedirectToAction("Details", "Servicos", new { id = pedido.ServicoId });
         }
 
         return RedirectToAction(nameof(Index));

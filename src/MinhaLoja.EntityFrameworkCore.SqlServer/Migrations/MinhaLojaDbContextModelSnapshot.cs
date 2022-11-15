@@ -65,32 +65,6 @@ namespace MinhaLoja.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clientes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            NomePrimeiro = "Cliente A",
-                            NomeSufixo = "Ref 1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            NomePrimeiro = "Cliente B",
-                            NomeSufixo = "Ref 1"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            NomePrimeiro = "Cliente B",
-                            NomeSufixo = "Ref 2"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            NomePrimeiro = "Cliente C",
-                            NomeSufixo = "Ref 1"
-                        });
                 });
 
             modelBuilder.Entity("MinhaLoja.Models.Pedido", b =>
@@ -145,59 +119,6 @@ namespace MinhaLoja.Migrations
                     b.HasIndex("ServicoId");
 
                     b.ToTable("Pedidos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClienteId = 1,
-                            Data = new DateTime(2021, 2, 28, 19, 53, 0, 0, DateTimeKind.Unspecified),
-                            Descricao = "Pedido 01",
-                            EntregaData = new DateTime(2021, 3, 3, 17, 15, 0, 0, DateTimeKind.Unspecified),
-                            EntregaPrevisaoData = new DateTime(2021, 3, 4, 19, 53, 0, 0, DateTimeKind.Unspecified),
-                            Pago = true,
-                            ServicoId = 1,
-                            SinalValor = 0m,
-                            Valor = 15.00m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClienteId = 2,
-                            Data = new DateTime(2021, 8, 30, 20, 30, 0, 0, DateTimeKind.Unspecified),
-                            Descricao = "Pedido 01",
-                            EntregaData = new DateTime(2021, 9, 1, 18, 30, 0, 0, DateTimeKind.Unspecified),
-                            EntregaPrevisaoData = new DateTime(2021, 9, 1, 20, 30, 0, 0, DateTimeKind.Unspecified),
-                            Pago = true,
-                            ServicoId = 1,
-                            SinalValor = 0m,
-                            Valor = 0.00m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ClienteId = 3,
-                            Data = new DateTime(2021, 11, 13, 9, 10, 0, 0, DateTimeKind.Unspecified),
-                            Descricao = "Pedido 01",
-                            EntregaData = new DateTime(2021, 11, 12, 18, 10, 0, 0, DateTimeKind.Unspecified),
-                            EntregaPrevisaoData = new DateTime(2021, 11, 13, 9, 10, 0, 0, DateTimeKind.Unspecified),
-                            Pago = false,
-                            ServicoId = 1,
-                            SinalValor = 0m,
-                            Valor = 7.00m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ClienteId = 3,
-                            Data = new DateTime(2021, 11, 13, 9, 10, 0, 0, DateTimeKind.Unspecified),
-                            Descricao = "Pedido 02",
-                            EntregaPrevisaoData = new DateTime(2021, 11, 17, 9, 10, 0, 0, DateTimeKind.Unspecified),
-                            Pago = false,
-                            ServicoId = 2,
-                            SinalValor = 0m,
-                            Valor = 10.00m
-                        });
                 });
 
             modelBuilder.Entity("MinhaLoja.Models.PedidoEntregaPrevisaoHistorico", b =>
@@ -225,26 +146,6 @@ namespace MinhaLoja.Migrations
                     b.HasIndex("PedidoId");
 
                     b.ToTable("PedidoEntregaPrevisaoHistoricos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Data = new DateTime(2021, 3, 2, 19, 53, 0, 0, DateTimeKind.Unspecified),
-                            PedidoId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Data = new DateTime(2021, 11, 13, 9, 10, 0, 0, DateTimeKind.Unspecified),
-                            PedidoId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Data = new DateTime(2021, 11, 15, 9, 10, 0, 0, DateTimeKind.Unspecified),
-                            PedidoId = 4
-                        });
                 });
 
             modelBuilder.Entity("MinhaLoja.Models.Servico", b =>
@@ -273,20 +174,6 @@ namespace MinhaLoja.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Servicos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Descricao = "Serviço 01",
-                            Valor = 15.00m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Descricao = "Serviço 02",
-                            Valor = 10.00m
-                        });
                 });
 
             modelBuilder.Entity("MinhaLoja.Models.Pedido", b =>

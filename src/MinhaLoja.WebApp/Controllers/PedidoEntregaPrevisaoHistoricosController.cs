@@ -30,19 +30,19 @@ public class PedidoEntregaPrevisaoHistoricosController : Controller
             return NotFound();
         }
 
-        var pagamento = await _db.GetPedidoEntregaPrevisaoHistoricoById(id.Value);
+        var pedidoEntregaPrevisaoHistorico = await _db.GetPedidoEntregaPrevisaoHistoricoById(id.Value);
 
-        if (pagamento == null)
+        if (pedidoEntregaPrevisaoHistorico == null)
         {
             return NotFound();
         }
 
-        return View(pagamento);
+        return View(pedidoEntregaPrevisaoHistorico);
     }
 
     public async Task<IActionResult> Create(int? pedidoId)
     {
-        var pagamento = new PedidoEntregaPrevisaoHistorico();
+        var pedidoEntregaPrevisaoHistorico = new PedidoEntregaPrevisaoHistorico();
 
         int? clienteId;
 
@@ -63,23 +63,26 @@ public class PedidoEntregaPrevisaoHistoricosController : Controller
                 ViewData["PedidoId"] = new SelectList(_db.Pedidos.Where(p => p.ClienteId == clienteId), "Id", "Descricao");
             }
 
-            pagamento.PedidoId = pedidoId.Value;
+            pedidoEntregaPrevisaoHistorico.PedidoId = pedidoId.Value;
 
             ViewData["Parent"] = "Pedido";
         }
         else
         {
             clienteId = null;
+
+            ViewData["PedidoId"] = new SelectList(_db.Pedidos, "Id", "Descricao");
         }
 
-        ViewData["PedidoId"] = new SelectList(_db.Pedidos, "Id", "Descricao");
+        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Nome", clienteId);
 
-        return View(pagamento);
+        return View(pedidoEntregaPrevisaoHistorico);
     }
+
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("PedidoId,Data,Valor")] PedidoEntregaPrevisaoHistorico pagamento, string? parent, int? clienteId, string? command)
+    public async Task<IActionResult> Create([Bind("PedidoId,Data,Valor")] PedidoEntregaPrevisaoHistorico pedidoEntregaPrevisaoHistorico, string? parent, int? clienteId, string? command)
     {
         if (command == "SelectCliente")
         {
@@ -94,24 +97,24 @@ public class PedidoEntregaPrevisaoHistoricosController : Controller
         {
             if (ModelState.IsValid)
             {
-                _db.Add(pagamento);
+                _db.Add(pedidoEntregaPrevisaoHistorico);
 
                 await _db.SaveChangesAsync();
 
                 if (parent == "Pedido")
                 {
-                    return RedirectToAction("Details", "Pedido", new { id = pagamento.PedidoId });
+                    return RedirectToAction("Details", "Pedidos", new { id = pedidoEntregaPrevisaoHistorico.PedidoId });
                 }
 
                 return RedirectToAction(nameof(Index));
             }
         }
 
-        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Descricao", clienteId);
+        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Nome", clienteId);
 
         ViewData["Parent"] = parent;
 
-        return View(pagamento);
+        return View(pedidoEntregaPrevisaoHistorico);
     }
 
     public async Task<IActionResult> Edit(int? id, string? parent, string? from)
@@ -121,16 +124,16 @@ public class PedidoEntregaPrevisaoHistoricosController : Controller
             return NotFound();
         }
 
-        var pagamento = await _db.PedidoEntregaPrevisaoHistoricos.FindAsync(id);
+        var pedidoEntregaPrevisaoHistorico = await _db.PedidoEntregaPrevisaoHistoricos.FindAsync(id);
 
-        if (pagamento == null)
+        if (pedidoEntregaPrevisaoHistorico == null)
         {
             return NotFound();
         }
 
         int? clienteId;
 
-        var pedido = await _db.Pedidos.FindAsync(pagamento.PedidoId);
+        var pedido = await _db.Pedidos.FindAsync(pedidoEntregaPrevisaoHistorico.PedidoId);
 
         if (pedido == null)
         {
@@ -141,22 +144,22 @@ public class PedidoEntregaPrevisaoHistoricosController : Controller
             clienteId = pedido.ClienteId;
         }
 
-        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Descricao", clienteId);
+        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Nome", clienteId);
 
-        ViewData["PedidoId"] = new SelectList(_db.Pedidos.Where(p => p.ClienteId == clienteId), "Id", "Descricao", pagamento.PedidoId);
+        ViewData["PedidoId"] = new SelectList(_db.Pedidos.Where(p => p.ClienteId == clienteId), "Id", "Descricao", pedidoEntregaPrevisaoHistorico.PedidoId);
 
         ViewData["Parent"] = parent;
 
         ViewData["From"] = from;
 
-        return View(pagamento);
+        return View(pedidoEntregaPrevisaoHistorico);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,PedidoId,Data,Valor,RowVersion")] PedidoEntregaPrevisaoHistorico pagamento, string? parent, string? from, int? clienteId, string? command)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,PedidoId,Data,Valor,RowVersion")] PedidoEntregaPrevisaoHistorico pedidoEntregaPrevisaoHistorico, string? parent, string? from, int? clienteId, string? command)
     {
-        if (id != pagamento.Id)
+        if (id != pedidoEntregaPrevisaoHistorico.Id)
         {
             return NotFound();
         }
@@ -167,7 +170,7 @@ public class PedidoEntregaPrevisaoHistoricosController : Controller
 
             if (clienteId.HasValue)
             {
-                ViewData["PedidoId"] = new SelectList(_db.Pedidos.Where(p => p.ClienteId == clienteId), "Id", "Descricao", pagamento.PedidoId);
+                ViewData["PedidoId"] = new SelectList(_db.Pedidos.Where(p => p.ClienteId == clienteId), "Id", "Descricao", pedidoEntregaPrevisaoHistorico.PedidoId);
             }
         }
         else
@@ -176,13 +179,13 @@ public class PedidoEntregaPrevisaoHistoricosController : Controller
             {
                 try
                 {
-                    _db.Update(pagamento);
+                    _db.Update(pedidoEntregaPrevisaoHistorico);
 
                     await _db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!_db.ExistsEntity<PedidoEntregaPrevisaoHistorico>(pagamento.Id))
+                    if (!_db.ExistsEntity<PedidoEntregaPrevisaoHistorico>(pedidoEntregaPrevisaoHistorico.Id))
                     {
                         return NotFound();
                     }
@@ -194,7 +197,7 @@ public class PedidoEntregaPrevisaoHistoricosController : Controller
 
                 if (parent == "Pedido")
                 {
-                    return RedirectToAction("Details", "Pedido", new { id = pagamento.PedidoId });
+                    return RedirectToAction("Details", "Pedidos", new { id = pedidoEntregaPrevisaoHistorico.PedidoId });
                 }
 
                 if (from == "Details")
@@ -206,13 +209,13 @@ public class PedidoEntregaPrevisaoHistoricosController : Controller
             }
         }
 
-        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Descricao", clienteId);
+        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Nome", clienteId);
 
         ViewData["Parent"] = parent;
 
         ViewData["From"] = from;
 
-        return View(pagamento);
+        return View(pedidoEntregaPrevisaoHistorico);
     }
 
     public async Task<IActionResult> Delete(int? id, string? parent)
@@ -222,36 +225,36 @@ public class PedidoEntregaPrevisaoHistoricosController : Controller
             return NotFound();
         }
 
-        var pagamento = await _db.GetPedidoEntregaPrevisaoHistoricoById(id.Value);
+        var pedidoEntregaPrevisaoHistorico = await _db.GetPedidoEntregaPrevisaoHistoricoById(id.Value);
 
-        if (pagamento == null)
+        if (pedidoEntregaPrevisaoHistorico == null)
         {
             return NotFound();
         }
 
         ViewData["Parent"] = parent;
 
-        return View(pagamento);
+        return View(pedidoEntregaPrevisaoHistorico);
     }
 
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id, string? parent)
     {
-        var pagamento = await _db.PedidoEntregaPrevisaoHistoricos.FindAsync(id);
+        var pedidoEntregaPrevisaoHistorico = await _db.PedidoEntregaPrevisaoHistoricos.FindAsync(id);
 
-        if (pagamento == null)
+        if (pedidoEntregaPrevisaoHistorico == null)
         {
             return NotFound();
         }
 
-        _db.PedidoEntregaPrevisaoHistoricos.Remove(pagamento);
+        _db.PedidoEntregaPrevisaoHistoricos.Remove(pedidoEntregaPrevisaoHistorico);
 
         await _db.SaveChangesAsync();
 
         if (parent == "Pedido")
         {
-            return RedirectToAction("Details", "Pedido", new { id = pagamento.PedidoId });
+            return RedirectToAction("Details", "Pedidos", new { id = pedidoEntregaPrevisaoHistorico.PedidoId });
         }
 
         return RedirectToAction(nameof(Index));

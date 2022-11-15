@@ -28,7 +28,11 @@ namespace MinhaLoja
                 // By default, all incoming requests will be authorized according to the default policy.
                 options.FallbackPolicy = options.DefaultPolicy;
             });
-            builder.Services.AddRazorPages();
+            builder.Services.AddRazorPages()
+                .AddViewOptions(options =>
+                {
+                    options.HtmlHelperOptions.ClientValidationEnabled = false;
+                });
 
             var app = builder.Build();
 

@@ -98,52 +98,6 @@ namespace MinhaLoja.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Clientes",
-                columns: new[] { "Id", "Endereco", "NomePrefixo", "NomePrimeiro", "NomeSegundo", "NomeSufixo", "Telefone" },
-                values: new object[,]
-                {
-                    { 1, null, null, "Cliente A", null, "Ref 1", null },
-                    { 2, null, null, "Cliente B", null, "Ref 1", null },
-                    { 3, null, null, "Cliente B", null, "Ref 2", null },
-                    { 4, null, null, "Cliente C", null, "Ref 1", null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Servicos",
-                columns: new[] { "Id", "Descricao", "Valor" },
-                values: new object[,]
-                {
-                    { 1, "Serviço 01", 15.00m },
-                    { 2, "Serviço 02", 10.00m }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Pedidos",
-                columns: new[] { "Id", "ClienteId", "Data", "Descricao", "EntregaData", "EntregaPrevisaoData", "Pago", "ServicoId", "SinalValor", "Valor" },
-                values: new object[,]
-                {
-                    { 1, 1, new DateTime(2021, 2, 28, 19, 53, 0, 0, DateTimeKind.Unspecified), "Pedido 01", new DateTime(2021, 3, 3, 17, 15, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 3, 4, 19, 53, 0, 0, DateTimeKind.Unspecified), true, 1, 0m, 15.00m },
-                    { 2, 2, new DateTime(2021, 8, 30, 20, 30, 0, 0, DateTimeKind.Unspecified), "Pedido 01", new DateTime(2021, 9, 1, 18, 30, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 9, 1, 20, 30, 0, 0, DateTimeKind.Unspecified), true, 1, 0m, 0.00m },
-                    { 3, 3, new DateTime(2021, 11, 13, 9, 10, 0, 0, DateTimeKind.Unspecified), "Pedido 01", new DateTime(2021, 11, 12, 18, 10, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 13, 9, 10, 0, 0, DateTimeKind.Unspecified), false, 1, 0m, 7.00m },
-                    { 4, 3, new DateTime(2021, 11, 13, 9, 10, 0, 0, DateTimeKind.Unspecified), "Pedido 02", null, new DateTime(2021, 11, 17, 9, 10, 0, 0, DateTimeKind.Unspecified), false, 2, 0m, 10.00m }
-                });
-
-            migrationBuilder.InsertData(
-                table: "PedidoEntregaPrevisaoHistoricos",
-                columns: new[] { "Id", "Data", "PedidoId" },
-                values: new object[] { 1, new DateTime(2021, 3, 2, 19, 53, 0, 0, DateTimeKind.Unspecified), 1 });
-
-            migrationBuilder.InsertData(
-                table: "PedidoEntregaPrevisaoHistoricos",
-                columns: new[] { "Id", "Data", "PedidoId" },
-                values: new object[] { 2, new DateTime(2021, 11, 13, 9, 10, 0, 0, DateTimeKind.Unspecified), 2 });
-
-            migrationBuilder.InsertData(
-                table: "PedidoEntregaPrevisaoHistoricos",
-                columns: new[] { "Id", "Data", "PedidoId" },
-                values: new object[] { 3, new DateTime(2021, 11, 15, 9, 10, 0, 0, DateTimeKind.Unspecified), 4 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_PedidoEntregaPrevisaoHistoricos_PedidoId",
                 table: "PedidoEntregaPrevisaoHistoricos",
