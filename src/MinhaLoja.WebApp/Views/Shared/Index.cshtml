@@ -1,0 +1,26 @@
+﻿@model IEnumerable<System.ComponentModel.Entity>
+
+@{
+    var info = Model.GetInfo();
+
+    ViewData["Title"] = $"{@info.PluralName}";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Minha Loja</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@info.PluralName</li>
+    </ol>
+</nav>
+
+<section>
+    <h1>@info.PluralName</h1>
+
+    <div class="container">
+        <p>
+            <a asp-action="Create">Criar Nov@(info.Gender)<i class="bi bi-plus-circle"></i></a>
+        </p>
+
+        <partial name="List/_@info.PluralMetaName" model="Model" />
+    </div>
+</section>

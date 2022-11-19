@@ -1,0 +1,105 @@
+﻿@model IEnumerable<MinhaLoja.Models.Pedido>
+
+@{
+    var parent = (string?)ViewData["Parent"];
+}
+
+<div class="row table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                @if (parent != "Cliente")
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cliente)
+                    </th>
+                }
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                @if (parent != "Servico")
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Servico)
+                    </th>
+                }
+                <th>
+                    @Html.DisplayNameFor(model => model.EntregaPrevisaoData)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EntregaData)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Valor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SinalValor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pago)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        <a asp-area="" asp-controller="Pedidos" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-link-45deg"></i></a>
+                        <a asp-area="" asp-controller="Pedidos" asp-action="Edit" asp-route-id="@item.Id" asp-route-parent="@parent"><i class="bi bi-pencil"></i></a>
+                        <a asp-area="" asp-controller="Pedidos" asp-action="Delete" asp-route-id="@item.Id" asp-route-parent="@parent" class="link-danger"><i class="bi bi-trash"></i></a>
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </th>
+                    @if (parent != "Cliente")
+                    {
+                        <td>
+                            <a asp-area="Cadastro" asp-controller="Cliente" asp-action="Details" asp-route-id="@item.ClienteId">
+                                @Html.DisplayFor(modelItem => item.Cliente.Nome)
+                                <i class="bi bi-link-45deg"></i>
+                            </a>
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    @if (parent != "Servico")
+                    {
+                        <td>
+                            <a asp-area="Cadastro" asp-controller="Servico" asp-action="Details" asp-route-id="@item.ServicoId">
+                                @Html.DisplayFor(modelItem => item.Servico.Descricao)
+                                <i class="bi bi-link-45deg"></i>
+                            </a>
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EntregaPrevisaoData)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EntregaData)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SinalValor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pago)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

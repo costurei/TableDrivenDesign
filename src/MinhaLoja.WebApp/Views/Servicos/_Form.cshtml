@@ -1,0 +1,29 @@
+﻿@model MinhaLoja.Models.Servico
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+@if (Model.IsEdit())
+{
+    @Html.HiddenFor(m => m.RowVersion)
+
+    <div class="row">
+        <label asp-for="Id" class="col-sm-4 col-md-3 col-form-label"></label>
+        <div class="col-sm-8 col-md-9">
+            <input asp-for="Id" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+}
+<div class="row">
+    <label asp-for="Descricao" class="col-sm-4 col-md-3 col-form-label"></label>
+    <div class="col-sm-8 col-md-9">
+        <input asp-for="Descricao" class="form-control" />
+        <span asp-validation-for="Descricao" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="Valor" class="col-sm-4 col-md-3 col-form-label"></label>
+    <div class="col-sm-8 col-md-9">
+        <input asp-for="Valor" class="form-control" />
+        <span asp-validation-for="Valor" class="text-danger"></span>
+    </div>
+</div>

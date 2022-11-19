@@ -1,0 +1,38 @@
+﻿@model MinhaLoja.Models.Servico
+
+@{
+    var parent = (string?)ViewData["Parent"];
+}
+
+<dl class="row">
+    <dt class="col-sm-3 col-md-4">
+        @Html.DisplayNameFor(model => model.Id)
+    </dt>
+    <dd class="col-sm-9 col-md-8">
+        @Html.DisplayFor(model => model.Id)
+    </dd>
+    <dt class="col-sm-3 col-md-4">
+        @Html.DisplayNameFor(model => model.Descricao)
+    </dt>
+    <dd class="col-sm-9 col-md-8">
+        @Html.DisplayFor(model => model.Descricao)
+    </dd>
+    <dt class="col-sm-3 col-md-4">
+        @Html.DisplayNameFor(model => model.Valor)
+    </dt>
+    <dd class="col-sm-9 col-md-8">
+        @Html.DisplayFor(model => model.Valor)
+    </dd>
+    <dt class="col-sm-3 col-md-4">
+        @Html.DisplayNameFor(model => model.PedidosTotalQuantidade)
+    </dt>
+    <dd class="col-sm-9 col-md-8">
+        @Html.DisplayFor(model => model.PedidosTotalQuantidade)
+    </dd>
+    <dt class="col-sm-3 col-md-4">
+        @Html.DisplayNameFor(model => model.PedidosTotalValor)
+    </dt>
+    <dd class="col-sm-9 col-md-8">
+        @Html.DisplayFor(model => model.PedidosTotalValor)
+    </dd>
+</dl>

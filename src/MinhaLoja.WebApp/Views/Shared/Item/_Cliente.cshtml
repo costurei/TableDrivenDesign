@@ -1,0 +1,62 @@
+﻿@model MinhaLoja.Models.Cliente
+
+@{
+    var parent = (string?)ViewData["Parent"];
+}
+
+<dl class="row">
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.Id)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.Id)&nbsp;
+    </dd>
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.NomePrefixo)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.NomePrefixo)&nbsp;
+    </dd>
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.NomePrimeiro)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.NomePrimeiro)&nbsp;
+    </dd>
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.NomeSegundo)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.NomeSegundo)&nbsp;
+    </dd>
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.NomeSufixo)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.NomeSufixo)&nbsp;
+    </dd>
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.Telefone)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.Telefone)&nbsp;
+    </dd>
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.Endereco)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.Endereco)&nbsp;
+    </dd>
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.PedidosTotalQuantidade)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.PedidosTotalQuantidade)&nbsp;
+    </dd>
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.PedidosTotalValor)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.PedidosTotalValor)&nbsp;
+    </dd>
+</dl>

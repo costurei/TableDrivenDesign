@@ -1,0 +1,27 @@
+﻿@model MinhaLoja.Models.Pedido
+
+@{
+    var parent = "Pedido";
+
+    var viewData = new ViewDataDictionary(ViewData) { { "Parent", parent } };
+}
+
+<section>
+    <h2>Históricos de Previsão de Entrega</h2>
+
+    <div class="container">
+        <p>
+            <a asp-area="" asp-controller="PedidoEntregaPrevisaoHistoricos" asp-action="Create" asp-route-pedidoId="@Model.Id">Criar Novo<i class="bi bi-plus-circle"></i></a>
+        </p>
+
+        <partial name="List/_PedidoEntregaPrevisaoHistoricos" model="Model.EntregaPrevisaoHistoricos" view-data=@viewData />
+
+        <section>
+            <h7>Não há mais detalhes de históricos de previsão de entrega</h7>
+        </section>
+    </div>
+</section>
+
+<section>
+    <h7>Não há mais detalhes de pedido</h7>
+</section>

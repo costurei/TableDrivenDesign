@@ -1,0 +1,57 @@
+﻿@model MinhaLoja.Models.Cliente
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+@if (Model.IsEdit())
+{
+    @Html.HiddenFor(m => m.RowVersion)
+
+    <div class="row">
+        <label asp-for="Id" class="col-sm-4 col-md-3 col-form-label"></label>
+        <div class="col-sm-8 col-md-9">
+            <input asp-for="Id" class="form-control" disabled="disabled" />
+        </div>
+    </div>
+}
+<div class="row">
+    <label asp-for="NomePrefixo" class="col-sm-4 col-md-3 col-form-label"></label>
+    <div class="col-sm-8 col-md-9">
+        <input asp-for="NomePrefixo" class="form-control" />
+        <span asp-validation-for="NomePrefixo" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="NomePrimeiro" class="col-sm-4 col-md-3 col-form-label"></label>
+    <div class="col-sm-8 col-md-9">
+        <input asp-for="NomePrimeiro" class="form-control" />
+        <span asp-validation-for="NomePrimeiro" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="NomeSegundo" class="col-sm-4 col-md-3 col-form-label"></label>
+    <div class="col-sm-8 col-md-9">
+        <input asp-for="NomeSegundo" class="form-control" />
+        <span asp-validation-for="NomeSegundo" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="NomeSufixo" class="col-sm-4 col-md-3 col-form-label"></label>
+    <div class="col-sm-8 col-md-9">
+        <input asp-for="NomeSufixo" class="form-control" />
+        <span asp-validation-for="NomeSufixo" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="Telefone" class="col-sm-4 col-md-3 col-form-label"></label>
+    <div class="col-sm-8 col-md-9">
+        <input asp-for="Telefone" class="form-control" />
+        <span asp-validation-for="Telefone" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <label asp-for="Endereco" class="col-sm-4 col-md-3 col-form-label"></label>
+    <div class="col-sm-8 col-md-9">
+        <input asp-for="Endereco" class="form-control" />
+        <span asp-validation-for="Endereco" class="text-danger"></span>
+    </div>
+</div>
