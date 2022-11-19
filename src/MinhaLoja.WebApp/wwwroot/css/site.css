@@ -1,14 +1,5 @@
 /*html {
     font-size: 14px;
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
-html {
     position: relative;
     min-height: 100%;
 }*/
@@ -21,35 +12,43 @@ a, a:hover, a:visited, a:focus {
     text-decoration: none;
 }
 
+dt, th, td {
+    white-space: nowrap;
+}
+
 dl {
     /*margin-bottom: 0;*/
+    padding-top: 5px;
 }
 
 dt {
     background-color: #f8f9fa;
-    padding-top: 10px;
+    padding-top: 6px;
+    padding-bottom: 7px;
 }
 
 dd {
-    padding-top: 11px;
     padding-left: 25px !important;
-    margin-bottom: 7px !important;
+    padding-top: 11px;
+    margin-bottom: 12px;
+}
+
+form > .row > * {
+    margin-top: 4px;
+}
+
+form > .row > .col-form-label {
+    font-weight: bold;
+    background-color: #f8f9fa;
+}
+
+form > .row:first-child > .col-form-label {
+    /*margin-top: 0px !important;*/
 }
 
 th:first-child {
     width: 85px;
     white-space: nowrap;
-}
-
-dt, th, td {
-    white-space: nowrap;
-}
-
-.col-form-label {
-    font-weight: bold;
-    background-color: #f8f9fa;
-    padding-top: 10px;
-    margin-top: -4px;
 }
 
 section {
@@ -80,10 +79,6 @@ p > button > i {
     padding-right: 10px;
 }
 
-form > div.row {
-    margin-top: .25rem !important;
-}
-
 h7 {
     background-color: #f8f9fa;
     /*border-left: 1px solid #dee2e6;*/
@@ -105,4 +100,28 @@ footer {
 
 .validation-summary-valid {
     display: none;
+}
+
+@media (min-width: 768px) {
+    /*html {
+        font-size: 16px;
+    }*/
+
+    dl {
+        padding-top: 0;
+    }
+
+    dt {
+        padding-top: 11px;
+        padding-bottom: 0px;
+    }
+
+    dd {
+        margin-bottom: 7px;
+    }
+
+    form > .row > .col-form-label {
+        margin-top: 0px;
+        padding-top: 11px;
+    }
 }
