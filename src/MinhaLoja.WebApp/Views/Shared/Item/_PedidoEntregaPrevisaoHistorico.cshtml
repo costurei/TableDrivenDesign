@@ -5,34 +5,34 @@
 }
 
 <dl class="row">
-    <dt class="col-sm-3 col-md-4">
+    <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.Id)
     </dt>
-    <dd class="col-sm-9 col-md-8">
+    <dd class="col-sm-8 col-md-9">
         @Html.DisplayFor(model => model.Id)
     </dd>
-    <dt class="col-sm-3 col-md-4">
+    <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.Pedido.Cliente)
     </dt>
-    <dd class="col-sm-9 col-md-8">
+    <dd class="col-sm-8 col-md-9">
         <a asp-area="Cadastro" asp-controller="Cliente" asp-action="Details" asp-route-id="@Model.Pedido.ClienteId">
             @Html.DisplayFor(model => model.Pedido.Cliente.Nome)
             <i class="bi bi-link-45deg"></i>
         </a>
     </dd>
-    <dt class="col-sm-3 col-md-4">
+    <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.Pedido)
     </dt>
-    <dd class="col-sm-9 col-md-8">
+    <dd class="col-sm-8 col-md-9">
         <a asp-area="" asp-controller="Pedido" asp-action="Details" asp-route-id="@Model.PedidoId">
             @Html.DisplayFor(model => model.Pedido.Descricao)
             <i class="bi bi-link-45deg"></i>
         </a>
     </dd>
-    <dt class="col-sm-3 col-md-4">
+    <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.Data)
     </dt>
-    <dd class="col-sm-9 col-md-8">
+    <dd class="col-sm-8 col-md-9">
         @Html.DisplayFor(model => model.Data)
     </dd>
 </dl>
