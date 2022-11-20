@@ -15,7 +15,7 @@
         @Html.DisplayNameFor(model => model.Cliente)
     </dt>
     <dd class="col-sm-8 col-md-9">
-        <a asp-area="" asp-controller="Cliente" asp-action="Details" asp-route-id="@Model.ClienteId">
+        <a asp-area="" asp-controller="Clientes" asp-action="Details" asp-route-id="@Model.ClienteId">
             @Html.DisplayFor(model => model.Cliente.Nome)
             <i class="bi bi-link-45deg"></i>
         </a>
@@ -30,7 +30,7 @@
         @Html.DisplayNameFor(model => model.Servico)
     </dt>
     <dd class="col-sm-8 col-md-9">
-        <a asp-area="" asp-controller="Servico" asp-action="Details" asp-route-id="@Model.ServicoId">
+        <a asp-area="" asp-controller="Servicos" asp-action="Details" asp-route-id="@Model.ServicoId">
             @Html.DisplayFor(model => model.Servico.Descricao)
             <i class="bi bi-link-45deg"></i>
         </a>

@@ -41,13 +41,13 @@
                     @if (parent != "Pedido")
                     {
                         <td>
-                            <a asp-area="" asp-controller="Cliente" asp-action="Details" asp-route-id="@item.Pedido.ClienteId">
+                            <a asp-area="" asp-controller="Clientes" asp-action="Details" asp-route-id="@item.Pedido.ClienteId">
                                 @Html.DisplayFor(modelItem => item.Pedido.Cliente.Nome)
                                 <i class="bi bi-link-45deg"></i>
                             </a>
                         </td>
                         <td>
-                            <a asp-area="" asp-controller="Pedido" asp-action="Details" asp-route-id="@item.PedidoId">
+                            <a asp-area="" asp-controller="Pedidos" asp-action="Details" asp-route-id="@item.PedidoId">
                                 @Html.DisplayFor(modelItem => item.Pedido.Descricao)
                                 <i class="bi bi-link-45deg"></i>
                             </a>
