@@ -17,9 +17,9 @@ namespace MinhaLoja.Models
         [StringLength(256, MinimumLength = 2)]
         public string Descricao { get; set; } = default!;
 
-        [DisplayName("Valor")]
+        [DisplayName("Preço (R$)")]
         [Precision(14, 2)]
-        public decimal Valor { get; set; }
+        public decimal PrecoValor { get; set; }
 
         [DisplayName("Pedidos (#)")]
         public int? PedidosTotalQuantidade { get => Pedidos?.Count; }
