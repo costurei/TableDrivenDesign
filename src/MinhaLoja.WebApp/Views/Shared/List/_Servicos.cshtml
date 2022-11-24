@@ -45,7 +45,8 @@
                         @Html.DisplayFor(modelItem => item.Descricao)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PrecoValor)                        
+                        @Html.DisplayFor(modelItem => item.PrecoValor)
+                        <a asp-area="" asp-controller="Servicos" asp-action="AlterPreco" asp-route-id="@item.Id" asp-route-parent="@parent"><i class="bi bi-pencil"></i></a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PrecoHistoricosTotalQuantidade)

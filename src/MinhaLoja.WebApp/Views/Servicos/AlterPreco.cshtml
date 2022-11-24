@@ -1,0 +1,73 @@
+﻿@model MinhaLoja.Models.ServicoPrecoAlterViewModel
+
+@{
+    ViewData["Title"] = $"Alterar Preço {Model.ServicoId} - Serviços";
+
+    var parent = (string?)ViewData["Parent"];
+    var from = (string?)ViewData["From"];
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Minha Loja</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Serviços</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Alterar Preço @Model.ServicoId</li>
+    </ol>
+</nav>
+
+<section>
+    <h1>Alterar Preço Serviço</h1>
+
+    <form asp-action="AlterPreco" class="container">
+        @*<h5>Cliente @Model.Id</h5>*@
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        @Html.HiddenFor(m => m.ServicoRowVersion)
+
+        <div class="row">
+            <label asp-for="ServicoId" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="ServicoId" class="form-control" disabled="disabled" />
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="ServicoDescricao" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="ServicoDescricao" class="form-control" disabled="disabled" />
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="ServicoPrecoValor" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="ServicoPrecoValor" class="form-control" />
+                <span asp-validation-for="ServicoPrecoValor" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="Data" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="Data" class="form-control" />
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+        </div>
+
+        <input type="hidden" asp-for="ServicoId" />
+
+        @*<input type="hidden" asp-for="RowVersion" />*@
+
+        <input type="hidden" asp-for="@parent" />
+
+        <input type="hidden" asp-for="@from" />
+
+        <p>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i>Salvar</button>
+        </p>
+    </form>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

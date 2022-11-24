@@ -21,7 +21,8 @@
         @Html.DisplayNameFor(model => model.PrecoValor)
     </dt>
     <dd class="col-sm-8 col-md-9">
-        @Html.DisplayFor(model => model.PrecoValor)        
+        @Html.DisplayFor(model => model.PrecoValor)
+        <a asp-action="AlterPreco" asp-route-id="@Model.Id" asp-route-parent="@parent" asp-route-from="Details">Alterar<i class="bi bi-pencil"></i></a>
     </dd>
     <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.PrecoHistoricosTotalQuantidade)

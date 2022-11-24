@@ -124,6 +124,96 @@ public class ServicosController : Controller
         return View(servico);
     }
 
+    public async Task<IActionResult> AlterPreco(int? id, string? from)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var servico = await _db.Servicos.FindAsync(id);
+
+        if (servico == null)
+        {
+            return NotFound();
+        }
+
+        var servicoPrecoAlterViewModel = new ServicoPrecoAlterViewModel
+        {
+            ServicoId = servico.Id,
+            ServicoRowVersion = servico.RowVersion,
+            ServicoDescricao = servico.Descricao,
+            ServicoPrecoValor = servico.PrecoValor,
+            Data = DateTime.Now
+        };
+
+        ViewData["From"] = from;
+
+        return View(servicoPrecoAlterViewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AlterPreco(int id, ServicoPrecoAlterViewModel servicoPrecoAlterViewModel, string? parent, string? from)
+    {
+        if (id != servicoPrecoAlterViewModel.ServicoId)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                var servico = await _db.Servicos.FindAsync(id);
+
+                if (servico == null)
+                {
+                    return NotFound();
+                }
+
+                var servicoPrecoHistorico = new ServicoPrecoHistorico
+                {
+                    ServicoId = servico.Id,
+                    Data = servicoPrecoAlterViewModel.Data,
+                    Valor = servico.PrecoValor
+                };
+
+                servico.PrecoValor = servicoPrecoAlterViewModel.ServicoPrecoValor;
+
+                servico.RowVersion = servicoPrecoAlterViewModel.ServicoRowVersion;
+
+                _db.Add(servicoPrecoHistorico);
+
+                _db.Update(servico);
+
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_db.ExistsEntity<Servico>(servicoPrecoAlterViewModel.ServicoId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            if (from == "Details")
+            {
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        ViewData["From"] = from;
+
+        return View(servicoPrecoAlterViewModel);
+    }
+
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
