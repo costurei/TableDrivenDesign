@@ -1,0 +1,35 @@
+﻿@model MinhaLoja.Models.ServicoPrecoHistorico
+
+@{
+    var parent = (string?)ViewData["Parent"];
+}
+
+<dl class="row">
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.Id)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.Id)
+    </dd>
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.Servico)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        <a asp-area="" asp-controller="Servicos" asp-action="Details" asp-route-id="@Model.ServicoId">
+            @Html.DisplayFor(model => model.Servico.Descricao)
+            <i class="bi bi-link-45deg"></i>
+        </a>
+    </dd>
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.Data)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.Data)
+    </dd>
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.Valor)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.Valor)
+    </dd>
+</dl>

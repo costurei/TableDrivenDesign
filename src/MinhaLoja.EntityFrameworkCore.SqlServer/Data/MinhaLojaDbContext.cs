@@ -9,6 +9,7 @@ namespace MinhaLoja.Data
         public DbSet<Pedido> Pedidos { get; set; } = default!;
         public DbSet<PedidoEntregaPrevisaoHistorico> PedidoEntregaPrevisaoHistoricos { get; set; } = default!;
         public DbSet<Servico> Servicos { get; set; } = default!;
+        public DbSet<ServicoPrecoHistorico> ServicoPrecoHistoricos { get; set; } = default!;
 
         public MinhaLojaDbContext(DbContextOptions<MinhaLojaDbContext> options)
             : base(options)

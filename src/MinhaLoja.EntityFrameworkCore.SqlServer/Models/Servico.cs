@@ -21,6 +21,12 @@ namespace MinhaLoja.Models
         [Precision(14, 2)]
         public decimal PrecoValor { get; set; }
 
+        [DisplayName("Hist. Preço (#)")]
+        public int? PrecoHistoricosTotalQuantidade { get => PrecoHistoricos?.Count; }
+
+        [DisplayName("Históricos de Preço")]
+        public virtual ICollection<ServicoPrecoHistorico>? PrecoHistoricos { get; set; }
+
         [DisplayName("Pedidos (#)")]
         public int? PedidosTotalQuantidade { get => Pedidos?.Count; }
 
@@ -32,6 +38,8 @@ namespace MinhaLoja.Models
 
         public Servico()
         {
+            PrecoHistoricos = new HashSet<ServicoPrecoHistorico>();
+
             Pedidos = new HashSet<Pedido>();
         }
     }

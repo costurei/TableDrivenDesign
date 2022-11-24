@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MinhaLoja.Data;
 
@@ -11,9 +12,10 @@ using MinhaLoja.Data;
 namespace MinhaLoja.Migrations
 {
     [DbContext(typeof(MinhaLojaDbContext))]
-    partial class MinhaLojaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221124221100_CreateServicoPrecoHistorico")]
+    partial class CreateServicoPrecoHistorico
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

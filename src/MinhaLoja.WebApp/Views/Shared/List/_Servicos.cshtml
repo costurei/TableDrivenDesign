@@ -19,6 +19,9 @@
                     @Html.DisplayNameFor(model => model.PrecoValor)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.PrecoHistoricosTotalQuantidade)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.PedidosTotalQuantidade)
                 </th>
                 <th>
@@ -42,7 +45,10 @@
                         @Html.DisplayFor(modelItem => item.Descricao)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PrecoValor)
+                        @Html.DisplayFor(modelItem => item.PrecoValor)                        
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrecoHistoricosTotalQuantidade)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PedidosTotalQuantidade)

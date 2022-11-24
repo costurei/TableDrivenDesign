@@ -7,6 +7,22 @@
 }
 
 <section>
+    <h2>Históricos de Preço</h2>
+
+    <div class="container">
+        <p>
+            <a asp-area="" asp-controller="ServicoPrecoHistoricos" asp-action="Create" asp-route-pedidoId="@Model.Id">Criar Novo<i class="bi bi-plus-circle"></i></a>
+        </p>
+
+        <partial name="List/_ServicoPrecoHistoricos" model="Model.PrecoHistoricos" view-data=@viewData />
+
+        <section>
+            <h7>Não há mais detalhes de históricos de preço</h7>
+        </section>
+    </div>
+</section>
+
+<section>
     <h2>Pedidos</h2>
 
     <div class="container">
