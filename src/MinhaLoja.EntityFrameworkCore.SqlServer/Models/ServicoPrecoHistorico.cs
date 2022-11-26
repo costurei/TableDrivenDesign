@@ -20,6 +20,9 @@ namespace MinhaLoja.Models
         [Precision(14, 2)]
         public decimal Valor { get; set; }
 
+        [DisplayName("Duração")]
+        public TimeSpan? Duracao { get => Data - Servico?.CreationDate; }
+
         public ServicoPrecoHistorico()
         {
 
