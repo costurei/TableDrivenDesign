@@ -14,35 +14,35 @@ namespace MinhaLoja.Migrations
                 table: "Servicos",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                defaultValueSql: "GETUTCDATE()");
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "CreationDate",
                 table: "ServicoPrecoHistoricos",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                defaultValueSql: "GETUTCDATE()");
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "CreationDate",
                 table: "Pedidos",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                defaultValueSql: "GETUTCDATE()");
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "CreationDate",
                 table: "PedidoEntregaPrevisaoHistoricos",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                defaultValueSql: "GETUTCDATE()");
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "CreationDate",
                 table: "Clientes",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                defaultValueSql: "GETUTCDATE()");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

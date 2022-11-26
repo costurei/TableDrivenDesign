@@ -1,5 +1,6 @@
 ﻿using MinhaLoja.Models;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 
 namespace MinhaLoja.Data
 {
@@ -30,6 +31,12 @@ namespace MinhaLoja.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Cliente>().Property(p => p.CreationDate).HasDefaultValueSql("GETUTCDATE()");
+            modelBuilder.Entity<Pedido>().Property(p => p.CreationDate).HasDefaultValueSql("GETUTCDATE()");
+            modelBuilder.Entity<PedidoEntregaPrevisaoHistorico>().Property(p => p.CreationDate).HasDefaultValueSql("GETUTCDATE()");
+            modelBuilder.Entity<Servico>().Property(p => p.CreationDate).HasDefaultValueSql("GETUTCDATE()");
+            modelBuilder.Entity<ServicoPrecoHistorico>().Property(p => p.CreationDate).HasDefaultValueSql("GETUTCDATE()");
 
             //modelBuilder.Entity<Cliente>().HasData(
             //    new Cliente { Id = 1, NomePrimeiro = "Cliente A", NomeSufixo = "Ref 1" },
