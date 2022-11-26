@@ -9,6 +9,8 @@ public abstract class Entity
     [Timestamp]
     public byte[] RowVersion { get; set; }
 
+    public DateTime CreationDate { get; set; }
+
     public Entity()
     {
         RowVersion = new byte[0];
