@@ -278,6 +278,100 @@ public class PedidosController : Controller
         return View(pedidoEntregaPrevisaoAlterViewModel);
     }
 
+    public async Task<IActionResult> Entregar(int? id, string? from)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var pedido = await _db.GetPedidoById(id.Value);
+
+        if (pedido == null)
+        {
+            return NotFound();
+        }
+
+        var pedidoEntregarViewModel = new PedidoEntregarViewModel
+        {
+            Id = pedido.Id,
+            RowVersion = pedido.RowVersion,
+            CreationDate = pedido.CreationDate,
+            ClienteId = pedido.ClienteId,
+            ClienteNome = pedido.Cliente.Nome,
+            Data = pedido.Data,
+            ServicoId = pedido.ServicoId,
+            ServicoDescricao = pedido.Servico.Descricao,
+            Descricao = pedido.Descricao,
+            EntregaPrevisaoData = pedido.EntregaPrevisaoData,
+            EntregaData = DateTime.Now,
+            Valor = pedido.Valor,
+            SinalValor = pedido.SinalValor,
+            PagamentoRestanteValor = pedido.Valor - pedido.SinalValor,
+            Pago = pedido.Pago,
+            EntregaPrevisaoHistoricosTotalQuantidade = pedido.EntregaPrevisaoHistoricosTotalQuantidade
+        };
+
+        ViewData["From"] = from;
+
+        return View(pedidoEntregarViewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Entregar(int id, PedidoEntregarViewModel pedidoEntregarViewModel, string? parent, string? from)
+    {
+        if (id != pedidoEntregarViewModel.Id)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                var pedido = await _db.Pedidos.FindAsync(id);
+
+                if (pedido == null)
+                {
+                    return NotFound();
+                }
+
+                pedido.EntregaData = pedidoEntregarViewModel.EntregaData;
+                
+                pedido.Pago = pedidoEntregarViewModel.Pago;
+
+                pedido.RowVersion = pedidoEntregarViewModel.RowVersion;
+
+                _db.Update(pedido);
+
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_db.ExistsEntity<Pedido>(pedidoEntregarViewModel.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            if (from == "Details")
+            {
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        ViewData["From"] = from;
+
+        return View(pedidoEntregarViewModel);
+    }
+
     public async Task<IActionResult> Delete(int? id, string? parent)
     {
         if (id == null)

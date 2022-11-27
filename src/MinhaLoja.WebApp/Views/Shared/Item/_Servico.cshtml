@@ -43,3 +43,8 @@
         @Html.DisplayFor(model => model.PedidosTotalValor)
     </dd>
 </dl>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" asp-route-parent="@parent" asp-route-from="Details">Editar<i class="bi bi-pencil-square"></i></a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" asp-route-parent="@parent" asp-route-from="Details" class="link-danger">Excluir<i class="bi bi-trash"></i></a>
+</p>
