@@ -179,6 +179,105 @@ public class PedidosController : Controller
         return View(pedido);
     }
 
+    public async Task<IActionResult> AlterEntregaPrevisao(int? id, string? from)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var pedido = await _db.GetPedidoById(id.Value);
+
+        if (pedido == null)
+        {
+            return NotFound();
+        }
+
+        var pedidoEntregaPrevisaoAlterViewModel = new PedidoEntregaPrevisaoAlterViewModel
+        {
+            Id = pedido.Id,
+            RowVersion = pedido.RowVersion,
+            CreationDate = pedido.CreationDate,
+            ClienteId = pedido.ClienteId,
+            ClienteNome = pedido.Cliente.Nome,
+            Data = pedido.Data,
+            ServicoId = pedido.ServicoId,
+            ServicoDescricao = pedido.Servico.Descricao,
+            Descricao = pedido.Descricao,
+            EntregaPrevisaoDataNova = DateTime.Now,
+            EntregaData = pedido.EntregaData,
+            Valor = pedido.Valor,
+            SinalValor = pedido.SinalValor,
+            Pago = pedido.Pago,
+            EntregaPrevisaoHistoricosTotalQuantidade = pedido.EntregaPrevisaoHistoricosTotalQuantidade
+        };
+
+        ViewData["From"] = from;
+
+        return View(pedidoEntregaPrevisaoAlterViewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AlterEntregaPrevisao(int id, PedidoEntregaPrevisaoAlterViewModel pedidoEntregaPrevisaoAlterViewModel, string? parent, string? from)
+    {
+        if (id != pedidoEntregaPrevisaoAlterViewModel.Id)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                var pedido = await _db.Pedidos.FindAsync(id);
+
+                if (pedido == null)
+                {
+                    return NotFound();
+                }
+
+                var pedidoEntregaPrevisaoHistorico = new PedidoEntregaPrevisaoHistorico
+                {
+                    PedidoId = pedido.Id,
+                    Data = pedido.EntregaPrevisaoData
+                };
+
+                pedido.EntregaPrevisaoData = pedidoEntregaPrevisaoAlterViewModel.EntregaPrevisaoDataNova;
+
+                pedido.RowVersion = pedidoEntregaPrevisaoAlterViewModel.RowVersion;
+
+                _db.Add(pedidoEntregaPrevisaoHistorico);
+
+                _db.Update(pedido);
+
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_db.ExistsEntity<Pedido>(pedidoEntregaPrevisaoAlterViewModel.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            if (from == "Details")
+            {
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        ViewData["From"] = from;
+
+        return View(pedidoEntregaPrevisaoAlterViewModel);
+    }
+
     public async Task<IActionResult> Delete(int? id, string? parent)
     {
         if (id == null)

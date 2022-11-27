@@ -9,7 +9,7 @@
         @Html.DisplayNameFor(model => model.Id)
     </dt>
     <dd class="col-sm-8 col-md-9">
-        @Html.DisplayFor(model => model.Id)
+        @Html.DisplayFor(model => model.Id)&nbsp;
     </dd>
     <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.Cliente)
@@ -18,13 +18,13 @@
         <a asp-area="" asp-controller="Clientes" asp-action="Details" asp-route-id="@Model.ClienteId">
             @Html.DisplayFor(model => model.Cliente.Nome)
             <i class="bi bi-link-45deg"></i>
-        </a>
+        </a>&nbsp;
     </dd>
     <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.Data)
     </dt>
     <dd class="col-sm-8 col-md-9">
-        @Html.DisplayFor(model => model.Data)
+        @Html.DisplayFor(model => model.Data)&nbsp;
     </dd>
     <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.Servico)
@@ -33,42 +33,49 @@
         <a asp-area="" asp-controller="Servicos" asp-action="Details" asp-route-id="@Model.ServicoId">
             @Html.DisplayFor(model => model.Servico.Descricao)
             <i class="bi bi-link-45deg"></i>
-        </a>
+        </a>&nbsp;
     </dd>
     <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.Descricao)
     </dt>
     <dd class="col-sm-8 col-md-9">
-        @Html.DisplayFor(model => model.Descricao)
+        @Html.DisplayFor(model => model.Descricao)&nbsp;
     </dd>
     <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.EntregaPrevisaoData)
     </dt>
     <dd class="col-sm-8 col-md-9">
         @Html.DisplayFor(model => model.EntregaPrevisaoData)
+        <a asp-action="AlterEntregaPrevisao" asp-route-id="@Model.Id" asp-route-parent="@parent" asp-route-from="Details">Alterar<i class="bi bi-pencil"></i></a>&nbsp;
     </dd>
     <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.EntregaData)
     </dt>
     <dd class="col-sm-8 col-md-9">
-        @Html.DisplayFor(model => model.EntregaData)
+        @Html.DisplayFor(model => model.EntregaData)&nbsp;
     </dd>
     <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.Valor)
     </dt>
     <dd class="col-sm-8 col-md-9">
-        @Html.DisplayFor(model => model.Valor)
+        @Html.DisplayFor(model => model.Valor)&nbsp;
     </dd>
     <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.SinalValor)
     </dt>
     <dd class="col-sm-8 col-md-9">
-        @Html.DisplayFor(model => model.SinalValor)
+        @Html.DisplayFor(model => model.SinalValor)&nbsp;
     </dd>
     <dt class="col-sm-4 col-md-3">
         @Html.DisplayNameFor(model => model.Pago)
     </dt>
     <dd class="col-sm-8 col-md-9">
-        @Html.DisplayFor(model => model.Pago)
+        @Html.DisplayFor(model => model.Pago)&nbsp;
+    </dd>
+    <dt class="col-sm-4 col-md-3">
+        @Html.DisplayNameFor(model => model.EntregaPrevisaoHistoricosTotalQuantidade)
+    </dt>
+    <dd class="col-sm-8 col-md-9">
+        @Html.DisplayFor(model => model.EntregaPrevisaoHistoricosTotalQuantidade)&nbsp;
     </dd>
 </dl>

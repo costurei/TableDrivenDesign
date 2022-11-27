@@ -1,0 +1,124 @@
+﻿@model MinhaLoja.Models.PedidoEntregaPrevisaoAlterViewModel
+
+@{
+    ViewData["Title"] = $"Alterar Previsão de Entrega {Model.Id} - Pedidos";
+
+    var parent = (string?)ViewData["Parent"];
+    var from = (string?)ViewData["From"];
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Minha Loja</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Pedidos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Alterar Previsão de Entrega @Model.Id</li>
+    </ol>
+</nav>
+
+<section>
+    <h1>Alterar Previsão de Entrega de Pedido</h1>
+
+    <form asp-action="AlterEntregaPrevisao" class="container">
+        @*<h5>Cliente @Model.Id</h5>*@
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        @Html.HiddenFor(m => m.RowVersion)
+
+        <div class="row">
+            <label asp-for="Id" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="Id" class="form-control" disabled="disabled" />
+                <input asp-for="Id" type="hidden" />
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="ClienteNome" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="ClienteNome" class="form-control" disabled="disabled" />
+                <input asp-for="ClienteNome" type="hidden" />
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="Data" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="Data" class="form-control" disabled="disabled" />
+                <input asp-for="Data" type="hidden" />
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="ServicoDescricao" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="ServicoDescricao" class="form-control" disabled="disabled" />
+                <input asp-for="ServicoDescricao" type="hidden" />
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="Descricao" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="Descricao" class="form-control" disabled="disabled" />
+                <input asp-for="Descricao" type="hidden" />
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="EntregaPrevisaoDataNova" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="EntregaPrevisaoDataNova" class="form-control" />
+                <span asp-validation-for="EntregaPrevisaoDataNova" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="EntregaData" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="EntregaData" class="form-control" disabled="disabled" />
+                <input asp-for="EntregaData" type="hidden" />
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="Valor" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="Valor" class="form-control" disabled="disabled" />
+                <input asp-for="Valor" type="hidden" />
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="SinalValor" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="SinalValor" class="form-control" disabled="disabled" />
+                <input asp-for="SinalValor" type="hidden" />
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="Pago" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="Pago" class="form-check-input" disabled="disabled" />
+                <input asp-for="Pago" type="hidden" />
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="EntregaPrevisaoHistoricosTotalQuantidade" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="EntregaPrevisaoHistoricosTotalQuantidade" class="form-control" disabled="disabled" />
+                <input asp-for="EntregaPrevisaoHistoricosTotalQuantidade" type="hidden" />
+            </div>
+        </div>
+
+        @*<input type="hidden" asp-for="Id" />*@
+
+        @*<input type="hidden" asp-for="RowVersion" />*@
+
+        <input type="hidden" asp-for="@parent" />
+
+        <input type="hidden" asp-for="@from" />
+
+        <p>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i>Salvar</button>
+        </p>
+    </form>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
