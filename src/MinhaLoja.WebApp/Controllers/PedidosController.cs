@@ -97,6 +97,85 @@ public class PedidosController : Controller
         return View(pedido);
     }
 
+    public async Task<IActionResult> Encomendar(int? clienteId)
+    {
+        var servicos = await _db.Servicos.ToListAsync();
+
+        var agora = DateTime.Now;
+
+        var pedidosEncomendarViewModel = new PedidosEncomendarViewModel
+        {
+            ClienteId = clienteId.HasValue ? clienteId.Value : default,
+            Data = agora,
+            Servicos = servicos.Select(servico => new PedidoServicoEncomendarViewModel
+            {
+                ServicoId = servico.Id,
+                ServicoDescricao = servico.Descricao,
+                Descricao = servico.Descricao,
+                Quantidade = 1,
+                Valor = servico.PrecoValor,
+                EntregaPrevisaoData = agora.AddDays(2)
+            }).ToArray()
+        };
+
+        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Nome");
+
+        if (clienteId.HasValue)
+        {
+            pedidosEncomendarViewModel.ClienteId = clienteId.Value;
+
+            ViewData["Parent"] = "Cliente";
+        }
+
+        return View(pedidosEncomendarViewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Encomendar(int id, PedidosEncomendarViewModel pedidosEncomendarViewModel, string? parent)
+    {
+        if (ModelState.IsValid)
+        {
+            foreach (var pedidoServicoEncomendarViewModel in pedidosEncomendarViewModel.Servicos)
+            {
+                if (pedidoServicoEncomendarViewModel.Selecionado)
+                {
+                    for (int i = 0; i < pedidoServicoEncomendarViewModel.Quantidade; i++)
+                    {
+                        var pedido = new Pedido
+                        {
+                            ClienteId = pedidosEncomendarViewModel.ClienteId,
+                            Data = pedidosEncomendarViewModel.Data,
+                            ServicoId = pedidoServicoEncomendarViewModel.ServicoId,
+                            Descricao = pedidoServicoEncomendarViewModel.Quantidade > 1 ? $"{pedidoServicoEncomendarViewModel.Descricao}#{i + 1}" : pedidoServicoEncomendarViewModel.Descricao,
+                            EntregaPrevisaoData = pedidoServicoEncomendarViewModel.EntregaPrevisaoData,
+                            Valor = pedidoServicoEncomendarViewModel.Valor,
+                            SinalValor = pedidoServicoEncomendarViewModel.SinalValor,
+                            Pago = pedidoServicoEncomendarViewModel.Pago
+                        };
+
+                        _db.Add(pedido);
+                    }
+                }
+            }
+
+            await _db.SaveChangesAsync();
+
+            if (parent == "Cliente")
+            {
+                return RedirectToAction("Details", "Clientes", new { id = pedidosEncomendarViewModel.ClienteId });
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        ViewData["ClienteId"] = new SelectList(_db.Clientes, "Id", "Nome", pedidosEncomendarViewModel.ClienteId);
+
+        ViewData["Parent"] = parent;
+
+        return View(pedidosEncomendarViewModel);
+    }
+
     public async Task<IActionResult> Edit(int? id, string? parent, string? from)
     {
         if (id == null)
@@ -338,7 +417,7 @@ public class PedidosController : Controller
                 }
 
                 pedido.EntregaData = pedidoEntregarViewModel.EntregaData;
-                
+
                 pedido.Pago = pedidoEntregarViewModel.Pago;
 
                 pedido.RowVersion = pedidoEntregarViewModel.RowVersion;

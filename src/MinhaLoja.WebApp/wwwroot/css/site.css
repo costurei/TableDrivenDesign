@@ -33,16 +33,16 @@ dd {
     margin-bottom: 12px;
 }
 
-form > .row > * {
+form .row > * {
     margin-top: 4px;
 }
 
-form > .row > .col-form-label {
+form .row > .col-form-label {
     font-weight: bold;
     background-color: #f8f9fa;
 }
 
-form > .row:first-child > .col-form-label {
+form .row:first-child > .col-form-label {
     /*margin-top: 0px !important;*/
 }
 
@@ -126,7 +126,7 @@ footer {
         margin-bottom: 7px;
     }
 
-    form > .row > .col-form-label {
+    form .row > .col-form-label {
         margin-top: 0px;
         padding-top: 11px;
     }

@@ -12,6 +12,7 @@
     <div class="container">
         <p>
             <a asp-area="" asp-controller="Pedidos" asp-action="Create" asp-route-clienteId="@Model.Id">Criar Novo<i class="bi bi-plus-circle"></i></a>
+            <a asp-area="" asp-controller="Pedidos" asp-action="Encomendar" asp-route-clienteId="@Model.Id">Encomendar<i class="bi bi-cart2"></i></a>
         </p>
 
         <partial name="List/_Pedidos" model="Model.Pedidos" view-data=@viewData />

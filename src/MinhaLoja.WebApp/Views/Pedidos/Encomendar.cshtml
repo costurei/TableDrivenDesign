@@ -1,0 +1,110 @@
+﻿@model MinhaLoja.Models.PedidosEncomendarViewModel
+
+@{
+    ViewData["Title"] = $"Encomendar - Pedidos";
+
+    var parent = (string?)ViewData["Parent"];
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Minha Loja</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Pedidos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Encomendar</li>
+    </ol>
+</nav>
+
+<section>
+    <h1>Encomendar Pedidos</h1>
+
+    <form asp-action="Encomendar" class="container">
+        @*<h5>Novo</h5>*@
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="row">
+            <label asp-for="ClienteId" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
+                <span asp-validation-for="ClienteId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <label asp-for="Data" class="col-sm-4 col-md-3 col-form-label"></label>
+            <div class="col-sm-8 col-md-9">
+                <input asp-for="Data" class="form-control" />
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            @for (int i = 0; i < Model.Servicos.Length; i++)
+            {
+                <fieldset class="container">
+                    <legend>@Model.Servicos[i].ServicoDescricao</legend>
+                    @Html.HiddenFor(m => @Model.Servicos[i].ServicoId)
+                    @Html.HiddenFor(m => @Model.Servicos[i].ServicoDescricao)
+                    <div class="row">
+                        <label asp-for="@Model.Servicos[i].Selecionado" class="col-sm-4 col-md-3 col-form-label"></label>
+                        <div class="col-sm-8 col-md-9">
+                            <input asp-for="@Model.Servicos[i].Selecionado" class="form-check-input" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label asp-for="@Model.Servicos[i].Descricao" class="col-sm-4 col-md-3 col-form-label"></label>
+                        <div class="col-sm-8 col-md-9">
+                            <input asp-for="@Model.Servicos[i].Descricao" class="form-control" />
+                            <span asp-validation-for="@Model.Servicos[i].Descricao" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label asp-for="@Model.Servicos[i].Quantidade" class="col-sm-4 col-md-3 col-form-label"></label>
+                        <div class="col-sm-8 col-md-9">
+                            <input asp-for="@Model.Servicos[i].Quantidade" class="form-control" />
+                            <span asp-validation-for="@Model.Servicos[i].Quantidade" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label asp-for="@Model.Servicos[i].Valor" class="col-sm-4 col-md-3 col-form-label"></label>
+                        <div class="col-sm-8 col-md-9">
+                            <input asp-for="@Model.Servicos[i].Valor" class="form-control" />
+                            <span asp-validation-for="@Model.Servicos[i].Valor" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label asp-for="@Model.Servicos[i].EntregaPrevisaoData" class="col-sm-4 col-md-3 col-form-label"></label>
+                        <div class="col-sm-8 col-md-9">
+                            <input asp-for="@Model.Servicos[i].EntregaPrevisaoData" class="form-control" />
+                            <span asp-validation-for="@Model.Servicos[i].EntregaPrevisaoData" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label asp-for="@Model.Servicos[i].SinalValor" class="col-sm-4 col-md-3 col-form-label"></label>
+                        <div class="col-sm-8 col-md-9">
+                            <input asp-for="@Model.Servicos[i].SinalValor" class="form-control" />
+                            <span asp-validation-for="@Model.Servicos[i].SinalValor" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label asp-for="@Model.Servicos[i].Pago" class="col-sm-4 col-md-3 col-form-label"></label>
+                        <div class="col-sm-8 col-md-9">
+                            <input asp-for="@Model.Servicos[i].Pago" class="form-check-input" />
+                            <span asp-validation-for="@Model.Servicos[i].Pago" class="text-danger"></span>
+                        </div>
+                    </div>
+                </fieldset>
+            }
+        </div>
+
+        <input type="hidden" asp-for="@parent" />
+
+        <p>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i>Salvar</button>
+        </p>
+    </form>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
